@@ -43,7 +43,7 @@ function results = runAttrRWTests()
     % run parameterized attribute read-write tests
     % params = Parameter.fromData('AD936xDevice', device, 'LOFreqs', LOFreqs);
     % suite = TestSuite.fromClass(?AD936x_LTETests, 'ExternalParameters', params);
-    sutie = runtests('ADRV9009Tests','ProcedureName','testADRV9009AttributeSingleValue');
+    suite = runtests('ADRV9009Tests','ProcedureName','testADRV9009AttributeSingleValue');
 
     xmlFile = 'AttrRWTestResults.xml';
     runner = TestRunner.withTextOutput('LoggingLevel',4);
