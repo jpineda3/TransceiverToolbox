@@ -43,21 +43,23 @@ function results = runAttrRWTests()
     % run parameterized attribute read-write tests
     % params = Parameter.fromData('AD936xDevice', device, 'LOFreqs', LOFreqs);
     % suite = TestSuite.fromClass(?AD936x_LTETests, 'ExternalParameters', params);
-    suite = runtests('ADRV9009Tests','ProcedureName','testADRV9009AttributeSingleValue');
+    suite = TestSuite.fromClass(?ADRV9009Tests, 'ProcedureName', 'testADRV9009AttributeSingleValue');
 
     xmlFile = 'AttrRWTestResults.xml';
+    disp(pwd);
     runner = TestRunner.withTextOutput('LoggingLevel',4);
-    runner.addPlugin(details_recording_plugin);
+    % runner.addPlugin(details_recording_plugin);
     plugin = XMLPlugin.producingJUnitFormat(xmlFile);
     runner.addPlugin(plugin);
     results = runner.run(suite);
-    try
-        log_lte_evm_test(results);
-    catch
-        warning('telemetry not found');
-    end
+
+    % try
+    %     log_lte_evm_test(results);
+    % catch
+    %     warning('telemetry not found');
+    % end
     
-    if ~usejava('desktop')
-        exit(any([results.Failed]));
-    end
+    % if ~usejava('desktop')
+    %     exit(any([results.Failed]));
+    % end
 end
