@@ -34,8 +34,8 @@ function results = runAttrRWTests(BoardName)
     end
     
     % run parameterized attribute read-write tests
-    switch device
-        case strcmp(device,'AD9361')
+    switch device{1}
+        case 'AD9361'
             suite = TestSuite.fromClass(?AD9361Tests, 'ProcedureName', 'testAD9391AttributeSingleValue');
         case strcmp(device,'ADRV9009')
             suite = TestSuite.fromClass(?ADRV9009Tests, 'ProcedureName', 'testADRV9009AttributeSingleValue');
