@@ -51,7 +51,7 @@ function results = runLTETests(BoardName, LOStepSize)
     runner.addPlugin(plugin);
     results = runner.run(suite);
     try
-        log_lte_evm_test(results);
+        telemetry.ingest.log_lte_test(results);
     catch
         warning('telemetry not found');
     end
