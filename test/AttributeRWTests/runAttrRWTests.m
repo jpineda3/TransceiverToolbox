@@ -43,13 +43,37 @@ function results = runAttrRWTests(BoardName)
     end
 
     xmlFile = 'AttrRWTestResults.xml';
-    disp(pwd);
     runner = TestRunner.withTextOutput('LoggingLevel',4);
     % runner.addPlugin(details_recording_plugin);
     plugin = XMLPlugin.producingJUnitFormat(xmlFile);
     runner.addPlugin(plugin);
     results = runner.run(suite);
 
+    [~,numTests] = size(results);
+    result_pass = 0;
+    result_fail = 0;
+    result_skip = 0;
+    result_error = 0;
+    for i = 1 : numTest
+        if results(i).Passed
+            result_pass = result_pass + 1;
+        elseif results(i).Incomplete 
+            if results(i).Failed  % error
+                result_error = result_error + 1;
+            else
+                result_skip = result_skip + 1;
+            end
+        elseif results(i).Failed % by verification
+            result_fail = result_error + 1;
+        end
+    end
+
+    telemetry.ingest.log_lte_test(results,getenv('server'));
+    % pass test result as system environment variable
+    % system('attr_test_pass=')
+    % system('attr_test_fail=')
+    % system('attr_test_skip=')
+    % system('attr_test_error=')
     % try
     %     log_lte_evm_test(results);
     % catch
