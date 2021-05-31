@@ -54,7 +54,8 @@ function results = runAttrRWTests(BoardName)
     result_fail = 0;
     result_skip = 0;
     result_error = 0;
-    for i = 1 : numTest
+
+    for i = 1 : numTests
         if results(i).Passed
             result_pass = result_pass + 1;
         elseif results(i).Incomplete 
