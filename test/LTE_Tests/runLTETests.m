@@ -50,11 +50,11 @@ function results = runLTETests(BoardName, LOStepSize)
     plugin = XMLPlugin.producingJUnitFormat(xmlFile);
     runner.addPlugin(plugin);
     results = runner.run(suite);
-    try
+    % try
         telemetry.ingest.log_lte_test(results,getenv('server'));
-    catch
-        warning('telemetry not found');
-    end
+    % catch
+    %     warning('telemetry not found');
+    % end
     
     if ~usejava('desktop')
         exit(any([results.Failed]));
