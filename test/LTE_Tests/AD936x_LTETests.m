@@ -98,9 +98,9 @@ classdef AD936x_LTETests < LTETests
     methods(Test)
         function TestAcrossLOFreqsTMNsBWs(testCase, LOFreqs, TMNs, BWs)
             % run test
-            testCase.LOFreq = LOFreqs;
-            testCase.TMN = TMNs;
-            testCase.BW = BWs;
+            testCase.LOFreq = LOFreqs; disp("at AD9363x_LTETests"); disp(LOFreqs);
+            testCase.TMN = TMNs; disp("at AD9363x_LTETests"); disp(TMNs);
+            testCase.BW = BWs; disp("at AD9363x_LTETests"); disp(BWs);
             testCase.RunTest();
         end
     end
