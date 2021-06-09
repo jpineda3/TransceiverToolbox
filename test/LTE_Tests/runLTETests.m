@@ -26,8 +26,8 @@ function results = runLTETests(BoardName, LOStepSize)
                 "zynq-adrv9361-z7035-box", ...
                 "zynq-adrv9361-z7035-bob"}
             device = {'AD9361'};
-            % LOFreqs = num2cell(70e6:LOStepSize:6000e6);
-            LOFreqs = num2cell(LOStepSize); % Debug
+            LOFreqs = num2cell(70e6:LOStepSize:6000e6);
+            % LOFreqs = num2cell(LOStepSize); % Debug
         case {"zynq-zc702-adv7511-ad9364-fmcomms4", ...
                 "zynq-zc706-adv7511-ad9364-fmcomms4", ...
                 "zynqmp-zcu102-rev10-ad9364-fmcomms4", ...
@@ -51,13 +51,13 @@ function results = runLTETests(BoardName, LOStepSize)
     plugin = XMLPlugin.producingJUnitFormat(xmlFile);
     runner.addPlugin(plugin);
     results = runner.run(suite); disp(results);
-    % try
+    try
         telemetry.ingest.log_lte_test(results,datestr(now,'yyyy-mm-ddTHH:MM:SS.FFF'),getenv('server'));
-    % catch
-    %     warning('telemetry not found');
-    % end
+    catch
+        warning('telemetry not found');
+    end
     
-    % if ~usejava('desktop')
-    %     exit(any([results.Failed]));
-    % end
+    if ~usejava('desktop')
+        exit(any([results.Failed]));
+    end
 end
