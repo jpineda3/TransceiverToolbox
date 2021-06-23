@@ -52,9 +52,11 @@ function results = runLTETests(BoardName, LOStepSize, server)
     runner.addPlugin(plugin);
     results = runner.run(suite); disp(results);
     % try
-        try
-            
-        telemetry.ingest.log_lte_test(results,datestr(now,'yyyy-mm-ddTHH:MM:SS.FFF'),server,0);
+        if nargin == 3   
+            telemetry.ingest.log_lte_test(results,datestr(now,'yyyy-mm-ddTHH:MM:SS.FFF'),server,0);
+        else
+            telemetry.ingest.log_lte_test(results,datestr(now,'yyyy-mm-ddTHH:MM:SS.FFF'));
+        end
     % catch
         % warning('telemetry not found');
     % end
