@@ -36,6 +36,10 @@ function results = runLTETests(BoardName, LOStepSize)
                 "zynq-zed-adv7511-ad9364-fmcomms4"}
             device = {'AD9364'};
             LOFreqs = num2cell(70e6:LOStepSize:6000e6);
+        case {"zynqmp-zcu102-rev10-adrv9002", ...
+                "zynq-zed-adv7511-adrv9002"}
+            device = {'ADRV9002'};
+            LOFreq = num2cel(70e6:LOStepSize:6000e6);
         otherwise
             error('%s unsupported for LTE test harness', BoardName);
     end
