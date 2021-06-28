@@ -58,40 +58,40 @@ classdef ADRV9002_LTETests < LTETests
             testCase.Tx = adi.(genvarname(testCase.DeviceName)).Tx;
             testCase.Tx.CenterFrequencyChannel0 = testCase.LOFreq;
             testCase.Tx.AttenuationChannel0 = testCase.TestSettings.TxGain;
-            testCase.Tx.EnableCyclicBuffers = true;
-            testCase.Tx.EnableCustomFilter = true;
+            % testCase.Tx.EnableCyclicBuffers = true;
+            % testCase.Tx.EnableCustomFilter = true;
             testCase.Tx.uri = testCase.uri;
             
             % rx setup
             testCase.Rx = adi.(genvarname(testCase.DeviceName)).Rx;
             testCase.Rx.CenterFrequencyChannel0 = testCase.LOFreq;
-            testCase.Rx.EnableCustomFilter = true;
-            testCase.Rx.GainControlModeChannel0 = ...
+            % testCase.Rx.EnableCustomFilter = true;
+            testCase.Rx.GainControllerSourceChannel0 = ...
                 testCase.TestSettings.RxGainMode;
-            testCase.Rx.kernelBuffersCount = 1;
+            % testCase.Rx.kernelBuffersCount = 1;
             testCase.Rx.SamplesPerFrame = ...
                 testCase.setRxSamplesPerFrame(testCase.BW);
             
             % configure custom filter settings
-            switch (testCase.BW)
-                case '5MHz'
-                    testCase.Tx.CustomFilterFileName = ...
-                        fullfile(testCase.root, testCase.filters_dir, 'LTE5_MHz.ftr');
-                case '10MHz'
-                    testCase.Tx.CustomFilterFileName = ...
-                        fullfile(testCase.root, testCase.filters_dir, 'LTE10_MHz.ftr');
-                case '15MHz'
-                    testCase.Tx.CustomFilterFileName = ...
-                        fullfile(testCase.root, testCase.filters_dir, 'LTE15_MHz.ftr');
-                case '20MHz'
-                    testCase.Tx.CustomFilterFileName = ...
-                        fullfile(testCase.root, testCase.filters_dir, 'LTE20_MHz.ftr');
-                otherwise
-                    st = dbstack;
-                    error('unsupported BW option in LTE test harness - %s\n', testCase.BW);
-            end
-            testCase.Rx.CustomFilterFileName = testCase.Tx.CustomFilterFileName;
-            testCase.Rx.uri = testCase.Tx.uri;
+            % switch (testCase.BW)
+            %     case '5MHz'
+            %         testCase.Tx.CustomFilterFileName = ...
+            %             fullfile(testCase.root, testCase.filters_dir, 'LTE5_MHz.ftr');
+            %     case '10MHz'
+            %         testCase.Tx.CustomFilterFileName = ...
+            %             fullfile(testCase.root, testCase.filters_dir, 'LTE10_MHz.ftr');
+            %     case '15MHz'
+            %         testCase.Tx.CustomFilterFileName = ...
+            %             fullfile(testCase.root, testCase.filters_dir, 'LTE15_MHz.ftr');
+            %     case '20MHz'
+            %         testCase.Tx.CustomFilterFileName = ...
+            %             fullfile(testCase.root, testCase.filters_dir, 'LTE20_MHz.ftr');
+            %     otherwise
+            %         st = dbstack;
+            %         error('unsupported BW option in LTE test harness - %s\n', testCase.BW);
+            % end
+            % testCase.Rx.CustomFilterFileName = testCase.Tx.CustomFilterFileName;
+            % testCase.Rx.uri = testCase.Tx.uri;
         end
     end
     
