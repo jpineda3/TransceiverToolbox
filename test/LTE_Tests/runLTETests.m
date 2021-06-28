@@ -48,7 +48,7 @@ function results = runLTETests(BoardName, LOStepSize, server)
     if strcmp(device, 'AD9361') || strcmp(device, 'AD9364')
         params = Parameter.fromData('AD936xDevice', device, 'LOFreqs', LOFreqs);
         suite = TestSuite.fromClass(?AD936x_LTETests, 'ExternalParameters', params);
-    else if strcmp(device, 'ADRV9002')
+    elseif strcmp(device, 'ADRV9002')
         params = Parameter.fromData('Device', device, 'LOFreqs', LOFreqs);
         suite = TestSuite.fromClass(?ADRV9002_LTETests, 'ExternalParameters', params);
     end
