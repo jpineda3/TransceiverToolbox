@@ -21,7 +21,7 @@ classdef ADRV9002_LTETests < LTETests
     end
     
     properties (Constant)
-        filters_dir = 'adrv9002_filters';
+        filters_dir = 'adrv936x_filters';
     end
     
     properties % demodulation-related
@@ -75,9 +75,9 @@ classdef ADRV9002_LTETests < LTETests
             % testCase.Rx.kernelBuffersCount = 1;
             testCase.Rx.SamplesPerFrame = ...
                 testCase.setRxSamplesPerFrame(testCase.BW);
-            testCase.Rx()
 
             % configure custom filter settings
+            disp(fullfile(testCase.root, testCase.filters_dir, 'LTE5_MHz.ftr'))
             % switch (testCase.BW)
             %     case '5MHz'
             %         testCase.Tx.CustomFilterFileName = ...
@@ -96,7 +96,8 @@ classdef ADRV9002_LTETests < LTETests
             %         error('unsupported BW option in LTE test harness - %s\n', testCase.BW);
             % end
             % testCase.Rx.CustomFilterFileName = testCase.Tx.CustomFilterFileName;
-            % testCase.Rx.uri = testCase.Tx.uri;
+            testCase.Rx.uri = testCase.Tx.uri;
+            % testCase.Rx();
         end
     end
     
