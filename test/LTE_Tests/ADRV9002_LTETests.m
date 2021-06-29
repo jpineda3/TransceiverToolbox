@@ -54,6 +54,7 @@ classdef ADRV9002_LTETests < LTETests
     
     methods(Access = protected)
         function ConfigHW(testCase)
+            disp('at ADR9002_LTETests, ConfigHW')
             % tx setup
             testCase.Tx = adi.(genvarname(testCase.DeviceName)).Tx;
             testCase.Tx.CenterFrequencyChannel0 = testCase.LOFreq;
@@ -61,12 +62,12 @@ classdef ADRV9002_LTETests < LTETests
             % testCase.Tx.EnableCyclicBuffers = true;
             % testCase.Tx.EnableCustomFilter = true;
             testCase.Tx.uri = testCase.uri;
-            testCase.Tx(1)
+            % testCase.Tx(1)
             
             % rx setup
             testCase.Rx = adi.(genvarname(testCase.DeviceName)).Rx;
             testCase.Rx.uri = testCase.uri;
-            testCase.Rx()
+            % testCase.Rx()
             testCase.Rx.CenterFrequencyChannel0 = testCase.LOFreq;
             % testCase.Rx.EnableCustomFilter = true;
             disp(testCase.TestSettings.RxGainMode)
