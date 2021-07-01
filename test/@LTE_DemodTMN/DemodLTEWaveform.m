@@ -7,7 +7,7 @@ function logEVM = DemodLTEWaveform(eNodeBInput, etm)
     logEVM.FreqOffset = FreqOffset;
     logEVM.FrameOffset = frameOffset/etm.SamplingRate;   
     %}
-   disp(etm)
+    
     % compute freq offset and IQ offset
     cec.PilotAverage = 'TestEVM';            
     [FreqOffset2, IQOffset_temp, refGrid, rxGridLow, rxGridHigh, ...
@@ -28,6 +28,8 @@ function logEVM = DemodLTEWaveform(eNodeBInput, etm)
     gridDims = lteResourceGridSize(etm);
     L = gridDims(2);
     count = 1;
+    disp("At DemodLTEWaveform.m")
+    disp(etm)
     for i=0:nSubframes-1
         % fprintf('Processing Subframe #%d\n', i);        
 
