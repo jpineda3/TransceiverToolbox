@@ -78,24 +78,24 @@ classdef ADRV9002_LTETests < LTETests
 
             % configure custom filter settings
             disp(fullfile(testCase.root, testCase.filters_dir, 'LTE5_MHz.ftr'))
-            % switch (testCase.BW)
-            %     case '5MHz'
-            %         testCase.Tx.CustomFilterFileName = ...
-            %             fullfile(testCase.root, testCase.filters_dir, 'LTE5_MHz.ftr');
-            %     case '10MHz'
-            %         testCase.Tx.CustomFilterFileName = ...
-            %             fullfile(testCase.root, testCase.filters_dir, 'LTE10_MHz.ftr');
-            %     case '15MHz'
-            %         testCase.Tx.CustomFilterFileName = ...
-            %             fullfile(testCase.root, testCase.filters_dir, 'LTE15_MHz.ftr');
-            %     case '20MHz'
-            %         testCase.Tx.CustomFilterFileName = ...
-            %             fullfile(testCase.root, testCase.filters_dir, 'LTE20_MHz.ftr');
-            %     otherwise
-            %         st = dbstack;
-            %         error('unsupported BW option in LTE test harness - %s\n', testCase.BW);
-            % end
-            % testCase.Rx.CustomFilterFileName = testCase.Tx.CustomFilterFileName;
+            switch (testCase.BW)
+                case '5MHz'
+                    testCase.Tx.CustomFilterFileName = ...
+                        fullfile(testCase.root, testCase.filters_dir, 'LTE5_MHz.ftr');
+                case '10MHz'
+                    testCase.Tx.CustomFilterFileName = ...
+                        fullfile(testCase.root, testCase.filters_dir, 'LTE10_MHz.ftr');
+                case '15MHz'
+                    testCase.Tx.CustomFilterFileName = ...
+                        fullfile(testCase.root, testCase.filters_dir, 'LTE15_MHz.ftr');
+                case '20MHz'
+                    testCase.Tx.CustomFilterFileName = ...
+                        fullfile(testCase.root, testCase.filters_dir, 'LTE20_MHz.ftr');
+                otherwise
+                    st = dbstack;
+                    error('unsupported BW option in LTE test harness - %s\n', testCase.BW);
+            end
+            testCase.Rx.CustomFilterFileName = testCase.Tx.CustomFilterFileName;
             testCase.Rx.uri = testCase.Tx.uri;
             % testCase.Rx();
         end
