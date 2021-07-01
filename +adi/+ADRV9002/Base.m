@@ -18,7 +18,7 @@ classdef (Abstract, Hidden = true) Base < ...
         %EnableCustomProfile Enable Custom Profile
         %   Enable use of custom Profile file to set SamplingRate, 
         %   RFBandwidth, and other features of transceiver
-        EnableCustomProfile = true;
+        EnableCustomProfile = false;
     end
     
     properties (Nontunable)
@@ -252,6 +252,7 @@ classdef (Abstract, Hidden = true) Base < ...
 
         
         function writeProfileFile(obj)
+            disp('Writing custom filter')
             if obj.Count() > 1
                 [~,props] = obj.Count(0,obj,'EnableCustomProfile');
                 if any(props{:})
