@@ -59,8 +59,8 @@ classdef ADRV9002_LTETests < LTETests
             testCase.Tx = adi.(genvarname(testCase.DeviceName)).Tx;
             testCase.Tx.CenterFrequencyChannel0 = testCase.LOFreq;
             testCase.Tx.AttenuationChannel0 = testCase.TestSettings.TxGain;
-            % testCase.Tx.EnableCyclicBuffers = true;
-            % testCase.Tx.EnableCustomFilter = true;
+            testCase.Tx.EnableCyclicBuffers = true;
+            testCase.Tx.EnableCustomFilter = true;
             testCase.Tx.uri = testCase.uri;
             % testCase.Tx(1)
             
@@ -68,11 +68,11 @@ classdef ADRV9002_LTETests < LTETests
             testCase.Rx = adi.(genvarname(testCase.DeviceName)).Rx;
             testCase.Rx.uri = testCase.uri;
             testCase.Rx.CenterFrequencyChannel0 = testCase.LOFreq;
-            % testCase.Rx.EnableCustomFilter = true;
+            testCase.Rx.EnableCustomFilter = true;
             disp(testCase.TestSettings.RxGainMode)
             % testCase.Rx.GainControllerSourceChannel0 = ...
                 % testCase.TestSettings.RxGainMode;
-            % testCase.Rx.kernelBuffersCount = 1;
+            testCase.Rx.kernelBuffersCount = 1;
             testCase.Rx.SamplesPerFrame = ...
                 testCase.setRxSamplesPerFrame(testCase.BW);
 
