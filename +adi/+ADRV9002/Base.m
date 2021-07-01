@@ -18,7 +18,7 @@ classdef (Abstract, Hidden = true) Base < ...
         %EnableCustomProfile Enable Custom Profile
         %   Enable use of custom Profile file to set SamplingRate, 
         %   RFBandwidth, and other features of transceiver
-        EnableCustomProfile = false;
+        EnableCustomProfile = true;
     end
     
     properties (Nontunable)
