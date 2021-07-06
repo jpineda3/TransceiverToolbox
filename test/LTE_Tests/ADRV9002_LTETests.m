@@ -63,14 +63,14 @@ classdef ADRV9002_LTETests < LTETests
             % testCase.Tx.EnableCustomFilter = true;
             testCase.Tx.uri = testCase.uri;
             % testCase.Tx(1)
-            disp(properties(testCase.Tx))
+            % disp(properties(testCase.Tx))
             
             % rx setup
             testCase.Rx = adi.(genvarname(testCase.DeviceName)).Rx;
             testCase.Rx.uri = testCase.uri;
             testCase.Rx.CenterFrequencyChannel0 = testCase.LOFreq;
             % testCase.Rx.EnableCustomFilter = true;
-            disp(testCase.TestSettings.RxGainMode)
+            % disp(testCase.TestSettings.RxGainMode)
             % testCase.Rx.GainControllerSourceChannel0 = ...
                 % testCase.TestSettings.RxGainMode;
             testCase.Rx.kernelBuffersCount = 1;
@@ -78,7 +78,7 @@ classdef ADRV9002_LTETests < LTETests
                 testCase.setRxSamplesPerFrame(testCase.BW);
 
             % configure custom filter settings
-            disp(fullfile(testCase.root, testCase.filters_dir, 'LTE5_MHz.ftr'))
+            % disp(fullfile(testCase.root, testCase.filters_dir, 'LTE5_MHz.ftr'))
             % switch (testCase.BW)
             %     case '5MHz'
             %         testCase.Tx.CustomFilterFileName = ...

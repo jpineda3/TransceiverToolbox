@@ -94,7 +94,7 @@ classdef (Abstract) LTETests < matlab.unittest.TestCase & ...
             dataInput = double(dataInput);   
             
             % demodulate received LTE waveform
-            disp(testCase.ETM)
+            % disp(testCase.ETM)
             % disp(dataInput)
             testCase.EVMData = LTE_DemodTMN.DemodLTEWaveform(dataInput, testCase.ETM);
         end
