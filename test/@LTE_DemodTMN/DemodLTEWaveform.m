@@ -28,6 +28,7 @@ function logEVM = DemodLTEWaveform(eNodeBInput, etm)
     gridDims = lteResourceGridSize(etm);
     L = gridDims(2);
     count = 1;
+    % disp("At DemodLTEWaveform.m")
     for i=0:nSubframes-1
         % fprintf('Processing Subframe #%d\n', i);        
 
@@ -35,7 +36,6 @@ function logEVM = DemodLTEWaveform(eNodeBInput, etm)
            refSymbols, pdsch_ind, etm] = ...
            LTE_DemodTMN.EVMSubframe(i, nSubframes, etm, allPRBSet, ...
            refGrid, rxGridLow, rxGridHigh, HestLow, HestHigh);
-         disp("At DemodLTEWaveform.m")
          % disp(etm)
         if (etm.CellRefP ~= 1) && (etm.CellRefP ~= 2) && (etm.CellRefP ~= 4)
            error('Test stopped. RF loopback cable likely disconnected. For the demodulated parameter field CellRefP, the value (%d) is not one of the set (1, 2, 4).\n',...
