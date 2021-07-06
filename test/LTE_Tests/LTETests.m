@@ -2,7 +2,7 @@ classdef (Abstract) LTETests < matlab.unittest.TestCase & ...
         LTE_DemodTMN & HardwareTests
     properties (TestParameter)
         TMNs = {'3.1'};
-        BWs = {'5MHz'};       
+        BWs = {'15MHz'};       
     end
     
     properties (Abstract, TestParameter) % TRx-dependent
