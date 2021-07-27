@@ -84,8 +84,8 @@ classdef ADRV9002_LTETests < LTETests
 
             % switch (testCase.BW)
             %     case '5MHz'
-            %         testCase.Tx.CustomFilterFileName = ...
-            %             fullfile(testCase.root, testCase.filters_dir, 'LTE5_MHz.ftr');
+                    testCase.Tx.CustomFilterFileName = ...
+                        fullfile(testCase.filters_dir, 'lte_5_cmos_api_48_8_7.json')
             %     case '10MHz'
             %         testCase.Tx.CustomFilterFileName = ...
             %             fullfile(testCase.root, testCase.filters_dir, 'LTE10_MHz.ftr');
@@ -99,7 +99,7 @@ classdef ADRV9002_LTETests < LTETests
             %         st = dbstack;
             %         error('unsupported BW option in LTE test harness - %s\n', testCase.BW);
             % end
-            % testCase.Rx.CustomFilterFileName = testCase.Tx.CustomFilterFileName;
+            testCase.Rx.CustomFilterFileName = testCase.Tx.CustomFilterFileName;
             testCase.Rx.uri = testCase.Tx.uri;
             % testCase.Rx();
         end
