@@ -101,7 +101,7 @@ classdef ADRV9002_LTETests < LTETests
             %         st = dbstack;
             %         error('unsupported BW option in LTE test harness - %s\n', testCase.BW);
             % end
-            testCase.Rx.CustomProfileFileName = testCase.Tx.CustomProfileFileName;
+            % testCase.Rx.CustomProfileFileName = testCase.Tx.CustomProfileFileName;
             % testCase.Rx.CustomStreamFileName = testCase.Tx.CustomStreamFileName;
             testCase.Rx.uri = testCase.Tx.uri;
             % testCase.Rx();
