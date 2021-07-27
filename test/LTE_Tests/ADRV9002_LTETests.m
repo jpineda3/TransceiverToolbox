@@ -21,7 +21,7 @@ classdef ADRV9002_LTETests < LTETests
     end
     
     properties (Constant)
-        filters_dir = 'adrv936x_filters';
+        filters_dir = 'adrv9002_profiles';
     end
     
     properties % demodulation-related
@@ -60,7 +60,7 @@ classdef ADRV9002_LTETests < LTETests
             testCase.Tx.CenterFrequencyChannel0 = testCase.LOFreq;
             testCase.Tx.AttenuationChannel0 = testCase.TestSettings.TxGain;
             testCase.Tx.EnableCyclicBuffers = true;
-            % testCase.Tx.EnableCustomFilter = true;
+            testCase.Tx.EnableCustomProfile = true;
             testCase.Tx.uri = testCase.uri;
             % testCase.Tx(1)
             % disp(properties(testCase.Tx))
@@ -69,7 +69,7 @@ classdef ADRV9002_LTETests < LTETests
             testCase.Rx = adi.(genvarname(testCase.DeviceName)).Rx;
             testCase.Rx.uri = testCase.uri;
             testCase.Rx.CenterFrequencyChannel0 = testCase.LOFreq;
-            % testCase.Rx.EnableCustomFilter = true;
+            testCase.Rx.EnableCustomProfile = true;
             % disp(testCase.TestSettings.RxGainMode)
             % testCase.Rx.GainControllerSourceChannel0 = ...
                 % testCase.TestSettings.RxGainMode;
@@ -78,7 +78,7 @@ classdef ADRV9002_LTETests < LTETests
                 testCase.setRxSamplesPerFrame(testCase.BW);
 
             % configure custom filter settings
-            % disp(fullfile(testCase.root, testCase.filters_dir, 'LTE5_MHz.ftr'))
+            disp(fullfile(testCase.root, testCase.filters_dir, 'LTE5_MHz.ftr')); disp(testCase.root);
             % switch (testCase.BW)
             %     case '5MHz'
             %         testCase.Tx.CustomFilterFileName = ...
