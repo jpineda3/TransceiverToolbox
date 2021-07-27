@@ -21,7 +21,7 @@ classdef ADRV9002_LTETests < LTETests
     end
     
     properties (Constant)
-        filters_dir = './adrv9002_profiles';
+        filters_dir = 'adrv9002_profiles';
     end
     
     properties % demodulation-related
