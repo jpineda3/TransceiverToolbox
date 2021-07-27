@@ -37,7 +37,8 @@ function results = runLTETests(BoardName, LOStepSize, server)
             device = {'AD9364'};
             LOFreqs = num2cell(70e6:LOStepSize:6000e6);
         case {"zynqmp-zcu102-rev10-adrv9002", ...
-                "zynq-zed-adv7511-adrv9002"}
+                "zynq-zed-adv7511-adrv9002", ...
+                "zynq-zed-adv7511-adrv9002-vcmos"}
             device = {'ADRV9002'};
             LOFreqs = num2cell(70e6:LOStepSize:6000e6);
         otherwise
