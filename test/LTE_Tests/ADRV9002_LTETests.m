@@ -21,7 +21,7 @@ classdef ADRV9002_LTETests < LTETests
     end
     
     properties (Constant)
-        filters_dir = 'adrv9002_profiles';
+        filters_dir = './adrv9002_profiles';
     end
     
     properties % demodulation-related
@@ -78,7 +78,10 @@ classdef ADRV9002_LTETests < LTETests
                 testCase.setRxSamplesPerFrame(testCase.BW);
 
             % configure custom filter settings
-            disp(fullfile(testCase.root, testCase.filters_dir, 'LTE5_MHz.ftr')); disp(testCase.root);
+            disp(fullfile(testCase.root, , 'LTE5_MHz.ftr')); 
+            disp(testCase.root);
+            disp(fullfile(testCase.filters_dir, 'lte_5_cmos_api_48_8_7.json'));
+
             % switch (testCase.BW)
             %     case '5MHz'
             %         testCase.Tx.CustomFilterFileName = ...
