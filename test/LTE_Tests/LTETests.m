@@ -76,6 +76,7 @@ classdef (Abstract) LTETests < matlab.unittest.TestCase & ...
     
     methods (Access = protected)
         function Gen_LTE_TMN_Wf_And_Transmit(testCase)
+            disp('@LTETests: Gen_LTE_TMN_Wf_And_Transmit');
             % generate LTE waveform
             [dataOutput, testCase.ETM] = LTE_DemodTMN.GenLTEWaveform(testCase.TMN, testCase.BW);
             
@@ -84,6 +85,7 @@ classdef (Abstract) LTETests < matlab.unittest.TestCase & ...
         end
         
         function Receive_LTE_TMN_Wf_And_Demod(testCase)
+            disp('@LTETests: Receive_LTE_TMN_Wf_And_Demod');
             % receive data
             for k=1:20
                 len = 0;
@@ -100,6 +102,7 @@ classdef (Abstract) LTETests < matlab.unittest.TestCase & ...
         end
         
         function ValidateEVM(testCase)
+            disp('@LTETests: ValidateEVM'); disp(testCase.EVMData);
             import matlab.unittest.constraints.IsLessThan
             
             testCase.assertThat(testCase.EVMData.evmRMSCh.PBCH, IsLessThan(5), 'evmPBCH');
