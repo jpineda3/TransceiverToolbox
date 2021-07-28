@@ -63,6 +63,7 @@ function results = runLTETests(BoardName, LOStepSize, server)
     results = runner.run(suite);
     % try
         if nargin == 3
+            disp(datestr(now,'yyyy-mm-ddTHH:MM:SS.FFF'));
             telemetry.ingest.log_lte_test(results,datestr(now,'yyyy-mm-ddTHH:MM:SS.FFF'),server,0);
         else
             telemetry.ingest.log_lte_test(results);
