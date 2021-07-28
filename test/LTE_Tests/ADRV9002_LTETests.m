@@ -69,7 +69,7 @@ classdef ADRV9002_LTETests < LTETests
             testCase.Rx = adi.(genvarname(testCase.DeviceName)).Rx;
             testCase.Rx.uri = testCase.uri;
             testCase.Rx.CenterFrequencyChannel0 = testCase.LOFreq;
-            testCase.Rx.EnableCustomProfile = true;
+            % testCase.Rx.EnableCustomProfile = true;
             % disp(testCase.TestSettings.RxGainMode)
             % testCase.Rx.GainControllerSourceChannel0 = ...
                 % testCase.TestSettings.RxGainMode;
@@ -111,6 +111,7 @@ classdef ADRV9002_LTETests < LTETests
     methods(Test)
         function TestAcrossLOFreqsTMNsBWs(testCase, LOFreqs, TMNs, BWs)
             % run test
+            disp('----------------------------------SINGLE TEST-------------------------------');
             testCase.LOFreq = LOFreqs;
             testCase.TMN = TMNs;
             testCase.BW = BWs;
