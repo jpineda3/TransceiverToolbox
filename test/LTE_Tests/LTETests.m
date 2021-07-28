@@ -102,7 +102,7 @@ classdef (Abstract) LTETests < matlab.unittest.TestCase & ...
         end
         
         function ValidateEVM(testCase)
-            disp('@LTETests: ValidateEVM'); disp(testCase.EVMData);
+            disp('@LTETests: ValidateEVM'); disp(testCase.EVMData.evmRMSCh);
             import matlab.unittest.constraints.IsLessThan
             
             testCase.assertThat(testCase.EVMData.evmRMSCh.PBCH, IsLessThan(5), 'evmPBCH');
