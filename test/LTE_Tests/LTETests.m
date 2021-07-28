@@ -111,7 +111,7 @@ classdef (Abstract) LTETests < matlab.unittest.TestCase & ...
             testCase.assertThat(testCase.EVMData.evmRMSCh.PDCCH, IsLessThan(5), 'evmPDCCH');
             testCase.assertThat(testCase.EVMData.evmRMSCh.RS, IsLessThan(5), 'evmRS');
             % testCase.assertThat(testCase.EVMData.evmRMSCh.PSS, IsLessThan(5), 'evmPSS');
-            testCase.assertThat(testCase.EVMData.evmRMSCh.SSS, IsLessThan(5), 'evmSSS');
+            % testCase.assertThat(testCase.EVMData.evmRMSCh.SSS, IsLessThan(5), 'evmSSS');
             testCase.assertThat(testCase.EVMData.evmRMSCh.PDSCH, IsLessThan(5), 'evmPDSCH');
         end
         
