@@ -78,7 +78,18 @@ lock(label: 'adgt_test_harness_boards') {
         sh 'git submodule update --init'
       }
       try {
-          sh 'IIO_URI="ip:' + ip + '" /usr/local/MATLAB/R2020b/bin/matlab -nosplash -nodesktop -nodisplay -r "addpath(genpath(\'test\'));addpath(genpath(\'deps\'));runHWTests(\'AD9361\')"'
+        //dir('TransceiverToolbox')
+        // {
+        //    sh 'mkdir dev'
+        //    dir('dev')
+        //    {
+        //        sh 'wget https://github.com/analogdevicesinc/TransceiverToolbox/releases/download/v20.2.1/AnalogDevicesTransceiverToolbox_v20.2.1.mltbx'
+        //        sh 'mv *.mltbx a.zip'
+        //        sh 'unzip a.zip'
+        //       sh 'mv fsroot/deps ../'
+        //    }
+        // }
+          sh 'IIO_URI="ip:' + ip + '" /usr/local/MATLAB/R2020b/bin/matlab -nosplash -nodesktop -nodisplay -r "ad = adi.utils.libad9361;ad.download_libad9361();addpath(genpath(\'test\'));addpath(genpath(\'deps\'));runHWTests(\'AD9361\')"'
       } finally {
           junit testResults: '*.xml', allowEmptyResults: true
       }
