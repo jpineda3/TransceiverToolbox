@@ -26,7 +26,7 @@ end
 try
     
     runner = matlab.unittest.TestRunner.withTextOutput('OutputDetail',1);
-    runner.addPlugin(DiagnosticsValidationPlugin)
+%     runner.addPlugin(DiagnosticsValidationPlugin)
     xmlFile = 'HWTestResults.xml';
     plugin = XMLPlugin.producingJUnitFormat(xmlFile);
     
