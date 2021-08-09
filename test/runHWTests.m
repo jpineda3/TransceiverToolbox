@@ -15,9 +15,17 @@ import matlab.unittest.selectors.HasProcedureName;
 at = {'AD9361Tests','AD9363Tests','AD9364Tests'...
         'AD9371Tests','ADRV9009Tests','DAQ2Tests'};
 
+    
 if nargin == 0
     suite = testsuite(at);
 else
+    try
+        if contains(board,'ad9361','IgnoreCase',true)
+            board = 'ad9361';
+        elseif contains(board,'ad9364','IgnoreCase',true)
+            board = 'ad9364';
+        end
+    end
     boards = lower(board);
     suite = testsuite(at);
     suite = selectIf(suite,HasProcedureName(ContainsSubstring(boards,'IgnoringCase',true)));
