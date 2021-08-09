@@ -57,9 +57,8 @@ lock(label: 'adgt_test_harness_boards') {
   harness.set_enable_resource_queuing(true)
   harness.set_elastic_server('192.168.10.1')
   harness.set_required_hardware([
-    "zynq-zed-adv7511-ad9361-fmcomms2-3",
-    "zynq-zed-adv7511-ad9364-fmcomms4"
-  ])
+    "zynq-zed-adv7511-ad9364-fmcomms4",
+    "zynq-zed-adv7511-ad9361-fmcomms2-3"])
   harness.set_docker_args(['Vivado', 'MATLAB'])
   harness.set_nebula_local_fs_source_root("artifactory.analog.com")
 
@@ -90,7 +89,7 @@ lock(label: 'adgt_test_harness_boards') {
         //       sh 'mv fsroot/deps ../'
         //    }
         // }
-          sh 'IIO_URI="ip:' + ip + '" /usr/local/MATLAB/R2020b/bin/matlab -nosplash -nodesktop -nodisplay -r "ad = adi.utils.libad9361;ad.download_libad9361();addpath(genpath(\'test\'));addpath(genpath(\'deps\'));runHWTests(\'AD9361\')"'
+          sh 'IIO_URI="ip:' + ip + '" /usr/local/MATLAB/R2020b/bin/matlab -nosplash -nodesktop -nodisplay -r "ad = adi.utils.libad9361;ad.download_libad9361();addpath(genpath(\'test\'));addpath(genpath(\'deps\'));runHWTests(\''+board+'\')"'
       } finally {
           junit testResults: '*.xml', allowEmptyResults: true
       }
