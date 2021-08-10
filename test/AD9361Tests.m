@@ -51,93 +51,93 @@ classdef AD9361Tests < HardwareTests
     
     methods (Test)
     
-        function testAD9361AttributeSingleValue(testCase,attribute_single_value)
-            warning('off') % Mute: "The AttenuationChannel1 property is not relevant in this configuration of the System object."
-            object = (attribute_single_value{1});
-            property = (attribute_single_value{2});
-            valueType = (attribute_single_value{3});
-            id = (attribute_single_value{4});
-            isOutput = (attribute_single_value{5});
-            attr = (attribute_single_value{6});
-            start = (attribute_single_value{7});
-            stop = (attribute_single_value{8});
-            step = (attribute_single_value{9});
-            tol = (attribute_single_value{10});
-            repeats = (attribute_single_value{11});
-            
-            switch object
-            case 'rx'
-                obj = adi.AD9361.Rx('uri',testCase.uri);
-                if strcmp(property(1:end-1),'GainChannel')
-                    obj.EnabledChannels = [1 2];
-                    obj.(strcat('GainControlModeChannel',property(end))) = 'manual';
-                end
-            case 'tx'
-                obj = adi.AD9361.Tx('uri',testCase.uri);
-                obj.DataSource = 'DDS';
-            end
-            obj(); %FIXME: RFBandwidth read errors without stepping before writing
-            
-            numints = round((stop-start)/step);
-            for ii = 1:repeats
-                ind = randi([0, numints]);
-                write_val = start+(step*ind);
-                obj.(property) = write_val;
-                obj();
-                switch valueType
-                    case 'LongLong'
-                        ret_val = double(obj.getAttributeLongLong(id,attr,isOutput));
-                    case 'Double'
-                        ret_val = double(obj.getAttributeDouble(id,attr,isOutput));
-                end
-                testCase.verifyEqual(ret_val,write_val,'AbsTol',tol,...
-                    sprintf('%s.%s: Actual value written to device outside tolerance.', (object), (property)))
-            end
-            obj.release();
+%         function testAD9361AttributeSingleValue(testCase,attribute_single_value)
+%             warning('off') % Mute: "The AttenuationChannel1 property is not relevant in this configuration of the System object."
+%             object = (attribute_single_value{1});
+%             property = (attribute_single_value{2});
+%             valueType = (attribute_single_value{3});
+%             id = (attribute_single_value{4});
+%             isOutput = (attribute_single_value{5});
+%             attr = (attribute_single_value{6});
+%             start = (attribute_single_value{7});
+%             stop = (attribute_single_value{8});
+%             step = (attribute_single_value{9});
+%             tol = (attribute_single_value{10});
+%             repeats = (attribute_single_value{11});
+%             
+%             switch object
+%             case 'rx'
+%                 obj = adi.AD9361.Rx('uri',testCase.uri);
+%                 if strcmp(property(1:end-1),'GainChannel')
+%                     obj.EnabledChannels = [1 2];
+%                     obj.(strcat('GainControlModeChannel',property(end))) = 'manual';
+%                 end
+%             case 'tx'
+%                 obj = adi.AD9361.Tx('uri',testCase.uri);
+%                 obj.DataSource = 'DDS';
+%             end
+%             obj(); %FIXME: RFBandwidth read errors without stepping before writing
+%             
+%             numints = round((stop-start)/step);
+%             for ii = 1:repeats
+%                 ind = randi([0, numints]);
+%                 write_val = start+(step*ind);
+%                 obj.(property) = write_val;
+%                 obj();
+%                 switch valueType
+%                     case 'LongLong'
+%                         ret_val = double(obj.getAttributeLongLong(id,attr,isOutput));
+%                     case 'Double'
+%                         ret_val = double(obj.getAttributeDouble(id,attr,isOutput));
+%                 end
+%                 testCase.verifyEqual(ret_val,write_val,'AbsTol',tol,...
+%                     sprintf('%s.%s: Actual value written to device outside tolerance.', (object), (property)))
+%             end
+%             obj.release();
+% 
+%         end
 
-        end
-
-        function testAD9361AttributeSingleValueStr(testCase,attribute_single_value_str)
-            object = (attribute_single_value_str{1});
-            property = (attribute_single_value_str{2});
-            valueType = (attribute_single_value_str{3});
-            id = (attribute_single_value_str{4});
-            isOutput = (attribute_single_value_str{5});
-            attr = (attribute_single_value_str{6});
-            option = (attribute_single_value_str{7});
-
-            switch object
-            case 'rx'
-                obj = adi.AD9361.Rx('uri',testCase.uri);
-                obj.EnabledChannels = [1 2];
-            case 'tx'
-                obj = adi.AD9361.Tx('uri',testCase.uri);
-                obj.DataSource = 'DDS';
-            end
-
-            if strcmp(property(1:end-1),'GainControlModeChannel')
-                obj();
-            end
-
-            for ii = 1:length(option)
-                obj.(property) = option(ii);
-                obj();
-                switch valueType
-                case 'DebugLongLong'
-                    ret_val = obj.getDebugAttributeLongLong(attr);
-                case 'Bool'
-                    ret_val = obj.getAttributeBool(id,attr,isOutput);
-                case 'RAW'
-                    ret_val = obj.getAttributeRAW(id,attr,isOutput);
-                end
-                if ~strcmp(property(1:end-1),'GainControlModeChannel')
-                    obj.release(); %FIXME: Releasing here will not work for GainControlMode
-                end
-                testCase.verifyTrue(strcmp(string(ret_val),string(option(ii))),...
-                    sprintf('%s.%s: Cannot set channel attribute to %s.', (object), (property), string(option(ii))))
-            end
-            obj.release();
-        end
+%         function testAD9361AttributeSingleValueStr(testCase,attribute_single_value_str)
+%             object = (attribute_single_value_str{1});
+%             property = (attribute_single_value_str{2});
+%             valueType = (attribute_single_value_str{3});
+%             id = (attribute_single_value_str{4});
+%             isOutput = (attribute_single_value_str{5});
+%             attr = (attribute_single_value_str{6});
+%             option = (attribute_single_value_str{7});
+% 
+%             switch object
+%             case 'rx'
+%                 obj = adi.AD9361.Rx('uri',testCase.uri);
+%                 obj.EnabledChannels = [1 2];
+%             case 'tx'
+%                 obj = adi.AD9361.Tx('uri',testCase.uri);
+%                 obj.DataSource = 'DDS';
+%             end
+% 
+%             if strcmp(property(1:end-1),'GainControlModeChannel')
+%                 obj();
+%             end
+% 
+%             for ii = 1:length(option)
+%                 obj.(property) = option(ii);
+%                 obj();
+%                 switch valueType
+%                 case 'DebugLongLong'
+%                     ret_val = obj.getDebugAttributeLongLong(attr);
+%                 case 'Bool'
+%                     ret_val = obj.getAttributeBool(id,attr,isOutput);
+%                 case 'RAW'
+%                     ret_val = obj.getAttributeRAW(id,attr,isOutput);
+%                 end
+%                 if ~strcmp(property(1:end-1),'GainControlModeChannel')
+%                     obj.release(); %FIXME: Releasing here will not work for GainControlMode
+%                 end
+%                 testCase.verifyTrue(strcmp(string(ret_val),string(option(ii))),...
+%                     sprintf('%s.%s: Cannot set channel attribute to %s.', (object), (property), string(option(ii))))
+%             end
+%             obj.release();
+%         end
         
     end
 
