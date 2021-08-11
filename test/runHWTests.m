@@ -22,7 +22,7 @@ else
     try
         switch board
             case "pluto"
-                board = {'Pluto'};
+                board = 'Pluto';
             case {"zynq-adrv9361-z7035-bob-cmos", ...
                     "socfpga_cyclone5_sockit_arradio", ...
                     "zynq-zed-adv7511-ad9361-fmcomms2-3", ...
@@ -33,7 +33,7 @@ else
                     "zynq-adrv9361-z7035-box", ...
                     "zynq-adrv9361-z7035-bob", ...
                     "zync-zed-adv7511-ad9361-fmcomms5"}
-                board = {'AD9361'};
+                board = 'AD9361';
             case {"zynq-zc702-adv7511-ad9364-fmcomms4", ...
                     "zynq-zc706-adv7511-ad9364-fmcomms4", ...
                     "zynqmp-zcu102-rev10-ad9364-fmcomms4", ...
@@ -41,14 +41,14 @@ else
                     "zynq-adrv9364-z7020-bob", ...
                     "zynq-adrv9364-z7020-bob-cmos", ...
                     "zynq-zed-adv7511-ad9364-fmcomms4"}
-                board = {'AD9364'};
+                board = 'AD9364';
             case {"zynqmp-zcu102-rev10-adrv9002", ...
                     "zynq-zed-adv7511-adrv9002", ...
                     "zynq-zed-adv7511-adrv9002-vcmos", ...
                     "zynqmp-zcu102-rev10-adrv9002-vcmos"}
                 board = {'ADRV9002'};
             case {"zynq-zc706-adv7511-fmcdaq2"}
-                board = {'DAQ2'};
+                board = 'DAQ2';
         end
     end
     
@@ -80,6 +80,6 @@ catch e
     bdclose('all');
     exit(1);
 end
-save(['BSPTest_',datestr(now,'dd_mm_yyyy-HH:MM:SS'),'.mat'],'t');
-bdclose('all');
+% save(['BSPTest_',datestr(now,'dd_mm_yyyy-HH:MM:SS'),'.mat'],'t');
+% bdclose('all');
 exit(any([results.Failed]));
