@@ -89,7 +89,7 @@ lock(label: 'adgt_test_harness_boards') {
         //       sh 'mv fsroot/deps ../'
         //    }
         // }
-          sh 'IIO_URI="ip:' + ip + '" /usr/local/MATLAB/R2020b/bin/matlab -nosplash -nodesktop -nodisplay -r "ad = adi.utils.libad9361;ad.download_libad9361();addpath(genpath(\'test\'));addpath(genpath(\'deps\'));runHWTests(\'AD9361\')"'
+          sh 'IIO_URI="ip:'+ip+'" elasticserver="192.168.10.1" /usr/local/MATLAB/R2020b/bin/matlab -nosplash -nodesktop -nodisplay -r "addpath(genpath(\'test\'));addpath(genpath(\'deps\'));addpath(genpath(\'/var/lib/jenkins/workspace/MATLAB/TransceiverToolboxHardwareDEBUG/telemetry\'));path;pyenv(\'Version\',\'/usr/bin/python3\');runLTETests(\''+board+'\',5e9,getenv(\'elasticserver\'))"'
       } finally {
           junit testResults: '*.xml', allowEmptyResults: true
       }
