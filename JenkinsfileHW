@@ -56,9 +56,7 @@ lock(label: 'adgt_test_harness_boards') {
   harness.set_docker_host_mode(false)
   harness.set_enable_resource_queuing(true)
   harness.set_elastic_server('192.168.10.1')
-  harness.set_required_hardware(["pluto", 
-                                  "zynq-adrv9361-z7035-fmc",
-                                  "zynq-zed-adv7511-ad9364-fmcomms4",
+  harness.set_required_hardware(["zynq-zed-adv7511-ad9364-fmcomms4",
                                   "zynq-zed-adv7511-ad9361-fmcomms2-3",
                                   ])
   harness.set_docker_args(['Vivado', 'MATLAB'])
