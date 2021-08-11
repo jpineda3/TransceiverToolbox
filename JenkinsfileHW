@@ -96,6 +96,7 @@ lock(label: 'adgt_test_harness_boards') {
         //    }
         // }
           sh 'IIO_URI="ip:' + ip + '" /usr/local/MATLAB/R2020b/bin/matlab -nosplash -nodesktop -nodisplay -r "ad = adi.utils.libad9361;ad.download_libad9361();addpath(genpath(\'test\'));addpath(genpath(\'deps\'));runHWTests(\''+board+'\')"'
+          //sh 'IIO_URI="ip:' + ip + '" /usr/local/MATLAB/R2020b/bin/matlab -nosplash -nodesktop -nodisplay -r "ad = adi.utils.libad9361;ad.download_libad9361();addpath(genpath(\'test\'));addpath(genpath(\'deps\'));runHWTests(\''+board+'\')"'
       } finally {
           junit testResults: '*.xml', allowEmptyResults: true
       }
