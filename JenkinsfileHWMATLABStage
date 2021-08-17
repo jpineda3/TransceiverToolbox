@@ -52,6 +52,8 @@ lock(label: 'adgt_test_harness_boards'){
     harness.set_nebula_local_fs_source_root("artifactory.analog.com")
     harness.set_matlab_commands(["ad=adi.utils.libad9361",
                                 "addpath(genpath('test'))",
+                                "disp(path)",
+                                "path",
                                 "pyenv('Version','/usr/bin/python3')",
                                 "disp('here')",
                                 "runHWTests(getenv('board'))"])
