@@ -1,7 +1,7 @@
 // Pipeline
 lock(label: 'adgt_test_harness_boards') {
-  // @Library('jp-lib@adgt-test-harness') _ // Not necessary when we turn on global libraries :)
-  @Library('jp-lib@master') _
+  // @Library('sdgtt-lib@adgt-test-harness') _ // Not necessary when we turn on global libraries :)
+  @Library('sdgtt-lib@fix_iio_not_defined') _
   def dependencies = ["nebula", "libiio", "libiio-py"]
   def hdlBranch = "hdl_2019_r2"
   def linuxBranch = "2019_R2"
