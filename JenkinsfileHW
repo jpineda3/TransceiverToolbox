@@ -1,7 +1,7 @@
 // Pipeline
 lock(label: 'adgt_test_harness_boards') {
-  // @Library('sdgtt-lib@adgt-test-harness') _ // Not necessary when we turn on global libraries :)
-  @Library('sdgtt-lib@fix_iio_not_defined') _
+  // @Library('jp-lib@adgt-test-harness') _ // Not necessary when we turn on global libraries :)
+  @Library('jp-lib@master') _
   def dependencies = ["nebula", "libiio", "libiio-py"]
   def hdlBranch = "hdl_2019_r2"
   def linuxBranch = "2019_R2"
@@ -21,6 +21,8 @@ lock(label: 'adgt_test_harness_boards') {
   harness.set_env('libiio_branch', 'v0.21')
   harness.set_env('telemetry_repo', 'https://github.com/kimpaller/telemetry.git')
   harness.set_env('telemetry_branch', 'master')
+  harness.set_env('matlab_repo','https://github.com/jpineda3/TransceiverToolbox.git')
+  harness.set_env('matlab_branch','hw-test')
 
   //update first the agent with the required deps
   harness.update_agents()
@@ -64,25 +66,33 @@ lock(label: 'adgt_test_harness_boards') {
   harness.add_stage(harness.stage_library("UpdateBOOTFiles"), 'stopWhenFail',
                     harness.stage_library("RecoverBoard"))
 
+  harness.set_matlab_commands(["ad=adi.utils.libad9361",
+                  "ad.download_libad9361()",
+                  "addpath(genpath('test'))",
+                  "pyenv('Version','/usr/bin/python3')",
+                  "runHWTests(getenv('board'))"])
+  harness.add_stage(harness.stage_library("MATLABTests"),'continueWhenFail')
+
   // Test stage
-  def matlab = {
-    String board ->
-    stage("Test MATLAB") {
-      def ip = nebula('update-config network-config dutip --board-name=' + board)
-      sh 'cp -r /root/.matlabro /root/.matlab'
-      retry(3) {
-        sleep(5)
-        checkout scm
-        sh 'git submodule update --init'
-      }
-      try {
-          sh 'IIO_URI="ip:' + ip + '" /usr/local/MATLAB/R2020b/bin/matlab -nosplash -nodesktop -nodisplay -r "ad = adi.utils.libad9361;ad.download_libad9361();addpath(genpath(\'test\'));addpath(genpath(\'deps\'));runHWTests(\''+board+'\')"'
-      } finally {
-          junit testResults: '*.xml', allowEmptyResults: true
-      }
-    }
-  }
-  harness.add_stage(matlab)
+  //def matlab = {
+  //  String board ->
+  //  stage("Test MATLAB") {
+  //    def ip = nebula('update-config network-config dutip --board-name=' + board)
+  //    sh 'cp -r /root/.matlabro /root/.matlab'
+  //    retry(3) {
+  //      sleep(5)
+  //      checkout scm
+  //      sh 'git submodule update --init'
+  //    }
+  //    try {
+  //       sh 'IIO_URI="ip:' + ip + '" /usr/local/MATLAB/R2020b/bin/matlab -nosplash -nodesktop -nodisplay -r "ad = adi.utils.libad9361;ad.download_libad9361();addpath(genpath(\'test\'));addpath(genpath(\'deps\'));runHWTests(\''+board+'\')"'
+  //    } finally {
+  //        junit testResults: '*.xml', allowEmptyResults: true
+  //    }
+  //  }
+  //}
+  //harness.add_stage(matlab)
+
   harness.add_stage(harness.stage_library("RestoreIP"), 'stopWhenFail')
   // harness.add_stage(harness.stage_library('SendResults'),'continueWhenFail')
 
