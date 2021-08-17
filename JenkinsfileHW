@@ -95,6 +95,7 @@ lock(label: 'adgt_test_harness_boards') {
 
   harness.add_stage(harness.stage_library("RestoreIP"), 'stopWhenFail')
   // harness.add_stage(harness.stage_library('SendResults'),'continueWhenFail')
+  // try trigger
 
   // // Go go
   harness.run_stages()
