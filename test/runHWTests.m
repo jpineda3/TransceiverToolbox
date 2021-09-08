@@ -82,4 +82,4 @@ catch e
 end
 % save(['BSPTest_',datestr(now,'dd_mm_yyyy-HH:MM:SS'),'.mat'],'t');
 % bdclose('all');
-% exit(any([results.Failed]));
+exit(any([results.Failed]));
