@@ -60,7 +60,7 @@ end
 try
     
     runner = matlab.unittest.TestRunner.withTextOutput('OutputDetail',1);
-%     runner.addPlugin(DiagnosticsValidationPlugin)
+    runner.addPlugin(DiagnosticsValidationPlugin)
     xmlFile = 'HWTestResults.xml';
     plugin = XMLPlugin.producingJUnitFormat(xmlFile);
     
@@ -78,8 +78,8 @@ try
 catch e
     disp(getReport(e,'extended'));
     bdclose('all');
-    exit(1);
+    exit(1); % this line is the culprit when there is an error!!!!!! WHAAAT
 end
-% save(['BSPTest_',datestr(now,'dd_mm_yyyy-HH:MM:SS'),'.mat'],'t');
-% bdclose('all');
+save(['BSPTest_',datestr(now,'dd_mm_yyyy-HH:MM:SS'),'.mat'],'t');
+bdclose('all');
 exit(any([results.Failed]));
