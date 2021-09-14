@@ -4,7 +4,7 @@ import matlab.unittest.TestRunner;
 import matlab.unittest.TestSuite;
 import matlab.unittest.plugins.TestReportPlugin;
 import matlab.unittest.plugins.XMLPlugin
-import matlab.unittest.plugins.DiagnosticsValidationPlugin
+% import matlab.unittest.plugins.DiagnosticsValidationPlugin
 import matlab.unittest.parameters.Parameter
 import matlab.unittest.plugins.ToUniqueFile;
 import matlab.unittest.plugins.TAPPlugin;
@@ -14,7 +14,7 @@ import matlab.unittest.selectors.HasProcedureName;
 
 switch board
     case "pluto"
-        at = 'AD9363Tests';
+        at = 'AD9363';
     case {"zynq-adrv9361-z7035-bob-cmos", ...
             "socfpga_cyclone5_sockit_arradio", ...
             "zynq-zed-adv7511-ad9361-fmcomms2-3", ...
@@ -24,7 +24,7 @@ switch board
             "zynq-adrv9361-z7035-fmc", ...
             "zynq-adrv9361-z7035-box", ...
             "zynq-adrv9361-z7035-bob"}
-        at = 'AD9361Tests';
+        at = 'AD9361';
     case {"zynq-zc702-adv7511-ad9364-fmcomms4", ...
             "zynq-zc706-adv7511-ad9364-fmcomms4", ...
             "zynqmp-zcu102-rev10-ad9364-fmcomms4", ...
@@ -32,12 +32,12 @@ switch board
             "zynq-adrv9364-z7020-bob", ...
             "zynq-adrv9364-z7020-bob-cmos", ...
             "zynq-zed-adv7511-ad9364-fmcomms4"}
-        at = 'AD9364Tests';
+        at = 'AD9364';
     case {"zynqmp-zcu102-rev10-ad9361-fmcomms5", ...
             "zynq-zc702-adv7511-ad9361-fmcomms5", ...
             "zynq-zc706-adv7511-ad9361-fmcomms5", ...
             "zynq-zc706-adv7511-ad9361-fmcomms5-ext-lo-adf5355"}
-        at = 'FMComms5Tests';
+        at = 'FMComms5';
     case {"socfpga_arria10_socdk_adrv9371", ...
             "zynqmp-zcu102-rev10-adrv9371", ...
             "zynq-zc706-adv7511-adrv9371"}
@@ -45,11 +45,11 @@ switch board
             "zynqmp-zcu102-rev10-adrv9009", ...
             "zynq-zc706-adv7511-adrv9009", ...
             "zynqmp-adrv9009-zu11eg-revb-adrv2crr-fmc-revb"}
-        at = 'ADRV9009Tests';
+        at = 'ADRV9009';
     case {"socfpga_arria10_socdk_daq2", ...
             "zynqmp-zcu102-rev10-fmcdaq2", ...
             "zynq-zc706-adv7511-fmcdaq2"}
-        at = 'DAQ2Tests';
+        at = 'DAQ2';
     otherwise
         error('%s unsupported for HW test harness', board);
 end
@@ -66,7 +66,7 @@ end
 try
     
     runner = matlab.unittest.TestRunner.withTextOutput('OutputDetail',1);
-    runner.addPlugin(DiagnosticsValidationPlugin)
+%     runner.addPlugin(DiagnosticsValidationPlugin)
     xmlFile = 'HWTestResults.xml';
     plugin = XMLPlugin.producingJUnitFormat(xmlFile);
     
@@ -86,6 +86,6 @@ catch e
     bdclose('all');
     exit(1);
 end
-save(['BSPTest_',datestr(now,'dd_mm_yyyy-HH:MM:SS'),'.mat'],'t');
+save(['BSPTest_',datestr(now,'dd_mm_yyyy-HH_MM_SS'),'.mat'],'t');
 bdclose('all');
 exit(any([results.Failed]));
