@@ -89,3 +89,4 @@ end
 save(['BSPTest_',datestr(now,'dd_mm_yyyy-HH_MM_SS'),'.mat'],'t');
 bdclose('all');
 exit(any([results.Failed]));
+end
