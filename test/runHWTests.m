@@ -92,5 +92,7 @@ end
 % save(['BSPTest_',datestr(now,'dd_mm_yyyy-HH_MM_SS'),'.mat'],'t');
 % bdclose('all');
 % exit(any([results.Failed]));
-exit(0);
+failures = 1;
+setenv('failures',string(failures));
+exit(failures);
 end
