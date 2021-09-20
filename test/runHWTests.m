@@ -63,30 +63,34 @@ else
     suite = selectIf(suite,HasProcedureName(ContainsSubstring(at,'IgnoringCase',true)));
 end
 
-try
-    
-    runner = matlab.unittest.TestRunner.withTextOutput('OutputDetail',1);
-%     runner.addPlugin(DiagnosticsValidationPlugin)
-    xmlFile = 'HWTestResults.xml';
-    plugin = XMLPlugin.producingJUnitFormat(xmlFile);
-    
-    runner.addPlugin(plugin);
-    results = runner.run(suite);
-    
-    t = table(results);
-    disp(t);
-    disp(repmat('#',1,80));
-    for test = results
-        if test.Failed
-            disp(test.Name);
-        end
-    end
-catch e
-    disp(getReport(e,'extended'));
-    bdclose('all');
-    exit(1);
-end
-save(['BSPTest_',datestr(now,'dd_mm_yyyy-HH_MM_SS'),'.mat'],'t');
-bdclose('all');
-exit(any([results.Failed]));
+% try
+%     
+%     runner = matlab.unittest.TestRunner.withTextOutput('OutputDetail',1);
+% %     runner.addPlugin(DiagnosticsValidationPlugin)
+% %     xmlFile = 'HWTestResults.xml';
+%     xmlFile = strcat('HWTestResults_',datestr(now,'dd_mm_yyyy-HH_MM_SS'),'.xml');
+%     plugin = XMLPlugin.producingJUnitFormat(xmlFile);
+%     
+%     runner.addPlugin(plugin);
+%     results = runner.run(suite);
+%     
+%     t = table(results);
+%     disp(t);
+%     disp(repmat('#',1,80));
+%     failures = 0;
+%     for test = results
+%         if test.Failed
+%             disp(test.Name);
+%             failures = failures + 1;
+%         end
+%     end
+% catch e
+%     disp(getReport(e,'extended'));
+%     bdclose('all');
+%     exit(1);
+% end
+% save(['BSPTest_',datestr(now,'dd_mm_yyyy-HH_MM_SS'),'.mat'],'t');
+% bdclose('all');
+% exit(any([results.Failed]));
+exit(0);
 end

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<testsuites>
+
+  <testsuite errors="9" failures="0" name="FMComms5Tests" skipped="0" tests="37" time="302.3272">
+    <testcase classname="FMComms5Tests" name="testFMComms5RxDMA(AllEnChsCombos=value1)" time="12.1277"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxDMA(AllEnChsCombos=value2)" time="6.32"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxDMA(AllEnChsCombos=value3)" time="5.8553"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxDMA(AllEnChsCombos=value4)" time="5.8149"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxDMA(AllEnChsCombos=value5)" time="6.1695"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxDMA(AllEnChsCombos=value6)" time="5.7803"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxDMA(AllEnChsCombos=value7)" time="6.2382"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxDMA(AllEnChsCombos=value8)" time="5.7853"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxDMA(AllEnChsCombos=value9)" time="6.5868"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxDMA(AllEnChsCombos=value10)" time="6.9225"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxDMA(AllEnChsCombos=value11)" time="6.1206"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterSingle(EnChsSingleCombos=value1)" time="9.3903"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterSingle(EnChsSingleCombos=value2)" time="9.0889"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterSingle(EnChsSingleCombos=value3)" time="9.7003"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterSingle(EnChsSingleCombos=value4)" time="9.3021"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterTuple(EnChsTupleCombos=value1)" time="10.0512"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterTuple(EnChsTupleCombos=value2)" time="9.518"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterTuple(EnChsTupleCombos=value3)" time="9.281"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterTuple(EnChsTupleCombos=value4)" time="9.9823"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterTuple(EnChsTupleCombos=value5)" time="10.0299"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterTuple(EnChsTupleCombos=value6)" time="9.5879"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterChipsAandB" time="10.2103"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterLTE(EnChsSingleCombos=value1)" time="13.4709"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterLTE(EnChsSingleCombos=value2)" time="8.17"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterLTE(EnChsSingleCombos=value3)" time="9.1168"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterLTE(EnChsSingleCombos=value4)" time="10.3831"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxCustomFilterLTEChipsAandB" time="10.8929"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5TxCustomFilterChipA" time="5.8157">
+      <error>Error occurred in FMComms5Tests/testFMComms5TxCustomFilterChipA and it did not run to completion.
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:libpointer:MustBeString'
+    --------------
+    Error Details:
+    --------------
+    Error using calllib
+    Parameter can not be converted to a character vector
+    
+    Error in matlabshared.libiio.channel/iio_channel_attr_write
+    
+    Error in adi.common.Attribute/setAttributeRAW (line 108)
+                bytes = iio_channel_attr_write(obj,chanPtr,attr,value);
+    
+    Error in adi.FMComms5.Tx/setupInit (line 317)
+                    obj.setAttributeRAW('voltage0','hardwaregain',obj.AttenuationChannel0,true);
+    
+    Error in adi.common.RxTx/configureChanBuffers (line 219)
+                setupInit(obj);
+    
+    Error in matlabshared.libiio.base/setupImpl
+    
+    Error in adi.common.RxTx/setupImpl (line 117)
+                setupImpl@matlabshared.libiio.base(obj);
+    
+    Error in adi.common.Tx/setupImpl (line 23)
+                setupImpl@adi.common.RxTx(obj);
+    
+    Error in FMComms5Tests/testFMComms5TxCustomFilterChipA (line 180)
+                [valid] = tx(data);</error>
+    </testcase>
+    <testcase classname="FMComms5Tests" name="testFMComms5TxCustomFilterChipB" time="7.237">
+      <error>Error occurred in FMComms5Tests/testFMComms5TxCustomFilterChipB and it did not run to completion.
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:libpointer:MustBeString'
+    --------------
+    Error Details:
+    --------------
+    Error using calllib
+    Parameter can not be converted to a character vector
+    
+    Error in matlabshared.libiio.channel/iio_channel_attr_write
+    
+    Error in adi.common.Attribute/setAttributeRAW (line 108)
+                bytes = iio_channel_attr_write(obj,chanPtr,attr,value);
+    
+    Error in adi.FMComms5.Tx/setupInit (line 323)
+                    obj.setAttributeRAW('voltage0','hardwaregain',obj.AttenuationChannel0ChipB,true,obj.iioDevPHYChipB);
+    
+    Error in adi.common.RxTx/configureChanBuffers (line 219)
+                setupInit(obj);
+    
+    Error in matlabshared.libiio.base/setupImpl
+    
+    Error in adi.common.RxTx/setupImpl (line 117)
+                setupImpl@matlabshared.libiio.base(obj);
+    
+    Error in adi.common.Tx/setupImpl (line 23)
+                setupImpl@adi.common.RxTx(obj);
+    
+    Error in FMComms5Tests/testFMComms5TxCustomFilterChipB (line 202)
+                [valid] = tx(data);</error>
+    </testcase>
+    <testcase classname="FMComms5Tests" name="testFMComms5TxCustomFilterLTEChipA" time="11.4597">
+      <error>Error occurred in FMComms5Tests/testFMComms5TxCustomFilterLTEChipA and it did not run to completion.
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:libpointer:MustBeString'
+    --------------
+    Error Details:
+    --------------
+    Error using calllib
+    Parameter can not be converted to a character vector
+    
+    Error in matlabshared.libiio.channel/iio_channel_attr_write
+    
+    Error in adi.common.Attribute/setAttributeRAW (line 108)
+                bytes = iio_channel_attr_write(obj,chanPtr,attr,value);
+    
+    Error in adi.FMComms5.Tx/setupInit (line 317)
+                    obj.setAttributeRAW('voltage0','hardwaregain',obj.AttenuationChannel0,true);
+    
+    Error in adi.common.RxTx/configureChanBuffers (line 219)
+                setupInit(obj);
+    
+    Error in matlabshared.libiio.base/setupImpl
+    
+    Error in adi.common.RxTx/setupImpl (line 117)
+                setupImpl@matlabshared.libiio.base(obj);
+    
+    Error in adi.common.Tx/setupImpl (line 23)
+                setupImpl@adi.common.RxTx(obj);
+    
+    Error in FMComms5Tests/testFMComms5TxCustomFilterLTEChipA (line 223)
+                [valid] = tx(data);</error>
+    </testcase>
+    <testcase classname="FMComms5Tests" name="testFMComms5TxCustomFilterLTEChipB" time="6.3624">
+      <error>Error occurred in FMComms5Tests/testFMComms5TxCustomFilterLTEChipB and it did not run to completion.
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:libpointer:MustBeString'
+    --------------
+    Error Details:
+    --------------
+    Error using calllib
+    Parameter can not be converted to a character vector
+    
+    Error in matlabshared.libiio.channel/iio_channel_attr_write
+    
+    Error in adi.common.Attribute/setAttributeRAW (line 108)
+                bytes = iio_channel_attr_write(obj,chanPtr,attr,value);
+    
+    Error in adi.FMComms5.Tx/setupInit (line 323)
+                    obj.setAttributeRAW('voltage0','hardwaregain',obj.AttenuationChannel0ChipB,true,obj.iioDevPHYChipB);
+    
+    Error in adi.common.RxTx/configureChanBuffers (line 219)
+                setupInit(obj);
+    
+    Error in matlabshared.libiio.base/setupImpl
+    
+    Error in adi.common.RxTx/setupImpl (line 117)
+                setupImpl@matlabshared.libiio.base(obj);
+    
+    Error in adi.common.Tx/setupImpl (line 23)
+                setupImpl@adi.common.RxTx(obj);
+    
+    Error in FMComms5Tests/testFMComms5TxCustomFilterLTEChipB (line 240)
+                [valid] = tx(data);</error>
+    </testcase>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxClearing" time="20.7961"/>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxWithTxDDSChipA1Rx" time="3.6936">
+      <error>Error occurred in FMComms5Tests/testFMComms5RxWithTxDDSChipA1Rx and it did not run to completion.
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:libpointer:MustBeString'
+    --------------
+    Error Details:
+    --------------
+    Error using calllib
+    Parameter can not be converted to a character vector
+    
+    Error in matlabshared.libiio.channel/iio_channel_attr_write
+    
+    Error in adi.common.Attribute/setAttributeRAW (line 108)
+                bytes = iio_channel_attr_write(obj,chanPtr,attr,value);
+    
+    Error in adi.FMComms5.Tx/setupInit (line 317)
+                    obj.setAttributeRAW('voltage0','hardwaregain',obj.AttenuationChannel0,true);
+    
+    Error in adi.common.RxTx/configureChanBuffers (line 219)
+                setupInit(obj);
+    
+    Error in matlabshared.libiio.base/setupImpl
+    
+    Error in adi.common.RxTx/setupImpl (line 117)
+                setupImpl@matlabshared.libiio.base(obj);
+    
+    Error in adi.common.Tx/setupImpl (line 23)
+                setupImpl@adi.common.RxTx(obj);
+    
+    Error in FMComms5Tests/testFMComms5RxWithTxDDSChipA1Rx (line 294)
+                tx();</error>
+    </testcase>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxWithTxDDSChipA2Rx" time="3.8745">
+      <error>Error occurred in FMComms5Tests/testFMComms5RxWithTxDDSChipA2Rx and it did not run to completion.
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:libpointer:MustBeString'
+    --------------
+    Error Details:
+    --------------
+    Error using calllib
+    Parameter can not be converted to a character vector
+    
+    Error in matlabshared.libiio.channel/iio_channel_attr_write
+    
+    Error in adi.common.Attribute/setAttributeRAW (line 108)
+                bytes = iio_channel_attr_write(obj,chanPtr,attr,value);
+    
+    Error in adi.FMComms5.Tx/setupInit (line 317)
+                    obj.setAttributeRAW('voltage0','hardwaregain',obj.AttenuationChannel0,true);
+    
+    Error in adi.common.RxTx/configureChanBuffers (line 219)
+                setupInit(obj);
+    
+    Error in matlabshared.libiio.base/setupImpl
+    
+    Error in adi.common.RxTx/setupImpl (line 117)
+                setupImpl@matlabshared.libiio.base(obj);
+    
+    Error in adi.common.Tx/setupImpl (line 23)
+                setupImpl@adi.common.RxTx(obj);
+    
+    Error in FMComms5Tests/testFMComms5RxWithTxDDSChipA2Rx (line 327)
+                tx();</error>
+    </testcase>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxWithTxDDSChipB1Rx" time="3.5577">
+      <error>Error occurred in FMComms5Tests/testFMComms5RxWithTxDDSChipB1Rx and it did not run to completion.
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:libpointer:MustBeString'
+    --------------
+    Error Details:
+    --------------
+    Error using calllib
+    Parameter can not be converted to a character vector
+    
+    Error in matlabshared.libiio.channel/iio_channel_attr_write
+    
+    Error in adi.common.Attribute/setAttributeRAW (line 108)
+                bytes = iio_channel_attr_write(obj,chanPtr,attr,value);
+    
+    Error in adi.FMComms5.Tx/setupInit (line 317)
+                    obj.setAttributeRAW('voltage0','hardwaregain',obj.AttenuationChannel0,true);
+    
+    Error in adi.common.RxTx/configureChanBuffers (line 219)
+                setupInit(obj);
+    
+    Error in matlabshared.libiio.base/setupImpl
+    
+    Error in adi.common.RxTx/setupImpl (line 117)
+                setupImpl@matlabshared.libiio.base(obj);
+    
+    Error in adi.common.Tx/setupImpl (line 23)
+                setupImpl@adi.common.RxTx(obj);
+    
+    Error in FMComms5Tests/testFMComms5RxWithTxDDSChipB1Rx (line 357)
+                tx();</error>
+    </testcase>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxWithTxDataChipA1Rx" time="3.794">
+      <error>Error occurred in FMComms5Tests/testFMComms5RxWithTxDataChipA1Rx and it did not run to completion.
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:libpointer:MustBeString'
+    --------------
+    Error Details:
+    --------------
+    Error using calllib
+    Parameter can not be converted to a character vector
+    
+    Error in matlabshared.libiio.channel/iio_channel_attr_write
+    
+    Error in adi.common.Attribute/setAttributeRAW (line 108)
+                bytes = iio_channel_attr_write(obj,chanPtr,attr,value);
+    
+    Error in adi.FMComms5.Tx/setupInit (line 317)
+                    obj.setAttributeRAW('voltage0','hardwaregain',obj.AttenuationChannel0,true);
+    
+    Error in adi.common.RxTx/configureChanBuffers (line 219)
+                setupInit(obj);
+    
+    Error in matlabshared.libiio.base/setupImpl
+    
+    Error in adi.common.RxTx/setupImpl (line 117)
+                setupImpl@matlabshared.libiio.base(obj);
+    
+    Error in adi.common.Tx/setupImpl (line 23)
+                setupImpl@adi.common.RxTx(obj);
+    
+    Error in FMComms5Tests/testFMComms5RxWithTxDataChipA1Rx (line 392)
+                tx(y);</error>
+    </testcase>
+    <testcase classname="FMComms5Tests" name="testFMComms5RxWithTxDataChipB1Rx" time="3.8395">
+      <error>Error occurred in FMComms5Tests/testFMComms5RxWithTxDataChipB1Rx and it did not run to completion.
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:libpointer:MustBeString'
+    --------------
+    Error Details:
+    --------------
+    Error using calllib
+    Parameter can not be converted to a character vector
+    
+    Error in matlabshared.libiio.channel/iio_channel_attr_write
+    
+    Error in adi.common.Attribute/setAttributeRAW (line 108)
+                bytes = iio_channel_attr_write(obj,chanPtr,attr,value);
+    
+    Error in adi.FMComms5.Tx/setupInit (line 323)
+                    obj.setAttributeRAW('voltage0','hardwaregain',obj.AttenuationChannel0ChipB,true,obj.iioDevPHYChipB);
+    
+    Error in adi.common.RxTx/configureChanBuffers (line 219)
+                setupInit(obj);
+    
+    Error in matlabshared.libiio.base/setupImpl
+    
+    Error in adi.common.RxTx/setupImpl (line 117)
+                setupImpl@matlabshared.libiio.base(obj);
+    
+    Error in adi.common.Tx/setupImpl (line 23)
+                setupImpl@adi.common.RxTx(obj);
+    
+    Error in FMComms5Tests/testFMComms5RxWithTxDataChipB1Rx (line 426)
+                tx(y);</error>
+    </testcase>
+  </testsuite>
+
+</testsuites>
