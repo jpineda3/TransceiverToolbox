@@ -58,7 +58,6 @@ lock(label: 'adgt_test_harness_boards') {
   harness.set_elastic_server('192.168.10.1')
   harness.set_required_hardware(["zynq-zc702-adv7511-ad9361-fmcomms2-3",
                                 "zynq-zed-adv7511-ad9361-fmcomms2-3",
-                                "zynq-adrv9361-z7035-fmc",
                                 "zynq-zed-adv7511-ad9364-fmcomms4",
                                 "zynq-zc706-adv7511-ad9361-fmcomms5",
                                 "zynq-zed-adv7511-adrv9002",
