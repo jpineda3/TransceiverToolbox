@@ -45,93 +45,93 @@ classdef DAQ2Tests < HardwareTests
             testCase.verifyGreaterThan(sum(abs(double(out))),0);
         end
         
-        function testDAQ2RxWithTxDDS(testCase)
-            % Test DDS output
-            tx = adi.DAQ2.Tx('uri',testCase.uri);
-            tx.DataSource = 'DDS';
-            toneFreq = 45e6;
-            tx.DDSFrequencies = repmat(toneFreq,2,2);
-            tx();
-            pause(1);
-            rx = adi.DAQ2.Rx('uri',testCase.uri);
-            rx.EnabledChannels = 1;
-            valid = false;
-            for k=1:10
-                [out, valid] = rx();
-            end
-            rx.release();
+%         function testDAQ2RxWithTxDDS(testCase)
+%             % Test DDS output
+%             tx = adi.DAQ2.Tx('uri',testCase.uri);
+%             tx.DataSource = 'DDS';
+%             toneFreq = 45e6;
+%             tx.DDSFrequencies = repmat(toneFreq,2,2);
+%             tx();
+%             pause(1);
+%             rx = adi.DAQ2.Rx('uri',testCase.uri);
+%             rx.EnabledChannels = 1;
+%             valid = false;
+%             for k=1:10
+%                 [out, valid] = rx();
+%             end
+%             rx.release();
             
-%             plot(real(out));
-%             testCase.estFrequency(out,rx.SamplingRate);
-            freqEst = meanfreq(double(real(out)),rx.SamplingRate);
+% %             plot(real(out));
+% %             testCase.estFrequency(out,rx.SamplingRate);
+%             freqEst = meanfreq(double(real(out)),rx.SamplingRate);
 
-            testCase.verifyTrue(valid);
-            testCase.verifyGreaterThan(sum(abs(double(out))),0);
-            testCase.verifyEqual(freqEst,toneFreq,'RelTol',0.01,...
-                'Frequency of DDS tone unexpected')
-        end
+%             testCase.verifyTrue(valid);
+%             testCase.verifyGreaterThan(sum(abs(double(out))),0);
+%             testCase.verifyEqual(freqEst,toneFreq,'RelTol',0.01,...
+%                 'Frequency of DDS tone unexpected')
+%         end
         
-        function testDAQ2RxWithTxDDSTwoChan(testCase)
-            % Test DDS output
-            tx = adi.DAQ2.Tx('uri',testCase.uri);
-            tx.DataSource = 'DDS';
-            toneFreq1 = 160e6;
-            toneFreq2 = 300e6;
-            tx.DDSFrequencies = [toneFreq1,toneFreq2;toneFreq1,toneFreq2];
-            tx.DDSScales = [1,1;0,0].*0.029;
-            tx();
-            pause(1);
-            rx = adi.DAQ2.Rx('uri',testCase.uri);
-            rx.EnabledChannels = [1 2];
-            valid = false;
-            for k=1:10
-                [out, valid] = rx();
-            end
-            rx.release();
+%         function testDAQ2RxWithTxDDSTwoChan(testCase)
+%             % Test DDS output
+%             tx = adi.DAQ2.Tx('uri',testCase.uri);
+%             tx.DataSource = 'DDS';
+%             toneFreq1 = 160e6;
+%             toneFreq2 = 300e6;
+%             tx.DDSFrequencies = [toneFreq1,toneFreq2;toneFreq1,toneFreq2];
+%             tx.DDSScales = [1,1;0,0].*0.029;
+%             tx();
+%             pause(1);
+%             rx = adi.DAQ2.Rx('uri',testCase.uri);
+%             rx.EnabledChannels = [1 2];
+%             valid = false;
+%             for k=1:10
+%                 [out, valid] = rx();
+%             end
+%             rx.release();
             
-%             plot(real(out));
-%             testCase.estFrequency(out,rx.SamplingRate);
-            freqEst1 = testCase.estFrequencyMax(out(:,1),rx.SamplingRate);
-            freqEst2 = testCase.estFrequencyMax(out(:,2),rx.SamplingRate);
-%             freqEst1 = meanfreq(double(real(out(:,1))),rx.SamplingRate);
-%             freqEst2 = meanfreq(double(real(out(:,2))),rx.SamplingRate);
+% %             plot(real(out));
+% %             testCase.estFrequency(out,rx.SamplingRate);
+%             freqEst1 = testCase.estFrequencyMax(out(:,1),rx.SamplingRate);
+%             freqEst2 = testCase.estFrequencyMax(out(:,2),rx.SamplingRate);
+% %             freqEst1 = meanfreq(double(real(out(:,1))),rx.SamplingRate);
+% %             freqEst2 = meanfreq(double(real(out(:,2))),rx.SamplingRate);
 
-            testCase.verifyTrue(valid);
-            testCase.verifyGreaterThan(sum(abs(double(out))),0);
-            testCase.verifyEqual(freqEst1,toneFreq1,'RelTol',0.01,...
-                'Frequency of DDS tone unexpected')
-            testCase.verifyEqual(freqEst2,toneFreq2,'RelTol',0.01,...
-                'Frequency of DDS tone unexpected')
-        end
+%             testCase.verifyTrue(valid);
+%             testCase.verifyGreaterThan(sum(abs(double(out))),0);
+%             testCase.verifyEqual(freqEst1,toneFreq1,'RelTol',0.01,...
+%                 'Frequency of DDS tone unexpected')
+%             testCase.verifyEqual(freqEst2,toneFreq2,'RelTol',0.01,...
+%                 'Frequency of DDS tone unexpected')
+%         end
         
-        function testDAQ2RxWithTxData(testCase)
-            % Test Tx DMA data output
-            amplitude = 2^15; frequency = 40e6;
-            swv1 = dsp.SineWave(amplitude, frequency);
-            swv1.ComplexOutput = false;
-            swv1.SamplesPerFrame = 2^20;
-            swv1.SampleRate = 1e9;
-            y = swv1();
+%         function testDAQ2RxWithTxData(testCase)
+%             % Test Tx DMA data output
+%             amplitude = 2^15; frequency = 40e6;
+%             swv1 = dsp.SineWave(amplitude, frequency);
+%             swv1.ComplexOutput = false;
+%             swv1.SamplesPerFrame = 2^20;
+%             swv1.SampleRate = 1e9;
+%             y = swv1();
             
-            tx = adi.DAQ2.Tx('uri',testCase.uri);
-            tx.DataSource = 'DMA';
-            tx.EnableCyclicBuffers = true;
-            tx(y);
-            rx = adi.DAQ2.Rx('uri',testCase.uri);
-            rx.EnabledChannels = 1;
-            for k=1:10
-                [out, valid] = rx();
-            end
-            rx.release();
+%             tx = adi.DAQ2.Tx('uri',testCase.uri);
+%             tx.DataSource = 'DMA';
+%             tx.EnableCyclicBuffers = true;
+%             tx(y);
+%             rx = adi.DAQ2.Rx('uri',testCase.uri);
+%             rx.EnabledChannels = 1;
+%             for k=1:10
+%                 [out, valid] = rx();
+%             end
+%             rx.release();
             
-%             plot(real(out));
-            freqEst = meanfreq(double(real(out)),rx.SamplingRate);
+% %             plot(real(out));
+%             freqEst = meanfreq(double(real(out)),rx.SamplingRate);
             
-            testCase.verifyTrue(valid);
-            testCase.verifyGreaterThan(sum(abs(double(out))),0);
-            testCase.verifyEqual(freqEst,frequency,'RelTol',0.01,...
-                'Frequency of ML tone unexpected')
-        end
+%             testCase.verifyTrue(valid);
+%             testCase.verifyGreaterThan(sum(abs(double(out))),0);
+%             testCase.verifyEqual(freqEst,frequency,'RelTol',0.01,...
+%                 'Frequency of ML tone unexpected')
+%         end
         
         function testDAQ2RxWithTxDataTwoChan(testCase)
             % Test Tx DMA data output

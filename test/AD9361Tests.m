@@ -49,97 +49,97 @@ classdef AD9361Tests < HardwareTests
         end
     end
     
-    methods (Test)
+    % methods (Test)
     
-        function testAD9361AttributeSingleValue(testCase,attribute_single_value)
-            warning('off') % Mute: "The AttenuationChannel1 property is not relevant in this configuration of the System object."
-            object = (attribute_single_value{1});
-            property = (attribute_single_value{2});
-            valueType = (attribute_single_value{3});
-            id = (attribute_single_value{4});
-            isOutput = (attribute_single_value{5});
-            attr = (attribute_single_value{6});
-            start = (attribute_single_value{7});
-            stop = (attribute_single_value{8});
-            step = (attribute_single_value{9});
-            tol = (attribute_single_value{10});
-            repeats = (attribute_single_value{11});
+    %     function testAD9361AttributeSingleValue(testCase,attribute_single_value)
+    %         warning('off') % Mute: "The AttenuationChannel1 property is not relevant in this configuration of the System object."
+    %         object = (attribute_single_value{1});
+    %         property = (attribute_single_value{2});
+    %         valueType = (attribute_single_value{3});
+    %         id = (attribute_single_value{4});
+    %         isOutput = (attribute_single_value{5});
+    %         attr = (attribute_single_value{6});
+    %         start = (attribute_single_value{7});
+    %         stop = (attribute_single_value{8});
+    %         step = (attribute_single_value{9});
+    %         tol = (attribute_single_value{10});
+    %         repeats = (attribute_single_value{11});
             
-            switch object
-            case 'rx'
-                obj = adi.AD9361.Rx('uri',testCase.uri);
-                if strcmp(property(1:end-1),'GainChannel')
-                    obj.EnabledChannels = [1 2];
-                    obj.(strcat('GainControlModeChannel',property(end))) = 'manual';
-                end
-            case 'tx'
-                obj = adi.AD9361.Tx('uri',testCase.uri);
-                obj.DataSource = 'DDS';
-            end
-            obj(); %FIXME: RFBandwidth read errors without stepping before writing
+    %         switch object
+    %         case 'rx'
+    %             obj = adi.AD9361.Rx('uri',testCase.uri);
+    %             if strcmp(property(1:end-1),'GainChannel')
+    %                 obj.EnabledChannels = [1 2];
+    %                 obj.(strcat('GainControlModeChannel',property(end))) = 'manual';
+    %             end
+    %         case 'tx'
+    %             obj = adi.AD9361.Tx('uri',testCase.uri);
+    %             obj.DataSource = 'DDS';
+    %         end
+    %         obj(); %FIXME: RFBandwidth read errors without stepping before writing
             
-            numints = round((stop-start)/step);
-            for ii = 1:repeats
-                ind = randi([0, numints]);
-                write_val = start+(step*ind);
-                obj.(property) = write_val;
-                obj();
-                switch valueType
-                    case 'LongLong'
-                        ret_val = double(obj.getAttributeLongLong(id,attr,isOutput));
-                    case 'Double'
-                        ret_val = double(obj.getAttributeDouble(id,attr,isOutput));
-                end
-                testCase.verifyEqual(ret_val,write_val,'AbsTol',tol,...
-                    sprintf('%s.%s: Actual value written to device outside tolerance.', (object), (property)))
-            end
-            obj.release();
+    %         numints = round((stop-start)/step);
+    %         for ii = 1:repeats
+    %             ind = randi([0, numints]);
+    %             write_val = start+(step*ind);
+    %             obj.(property) = write_val;
+    %             obj();
+    %             switch valueType
+    %                 case 'LongLong'
+    %                     ret_val = double(obj.getAttributeLongLong(id,attr,isOutput));
+    %                 case 'Double'
+    %                     ret_val = double(obj.getAttributeDouble(id,attr,isOutput));
+    %             end
+    %             testCase.verifyEqual(ret_val,write_val,'AbsTol',tol,...
+    %                 sprintf('%s.%s: Actual value written to device outside tolerance.', (object), (property)))
+    %         end
+    %         obj.release();
 
-        end
+    %     end
 
-        function testAD9361AttributeSingleValueStr(testCase,attribute_single_value_str)
-            object = (attribute_single_value_str{1});
-            property = (attribute_single_value_str{2});
-            valueType = (attribute_single_value_str{3});
-            id = (attribute_single_value_str{4});
-            isOutput = (attribute_single_value_str{5});
-            attr = (attribute_single_value_str{6});
-            option = (attribute_single_value_str{7});
+    %     function testAD9361AttributeSingleValueStr(testCase,attribute_single_value_str)
+    %         object = (attribute_single_value_str{1});
+    %         property = (attribute_single_value_str{2});
+    %         valueType = (attribute_single_value_str{3});
+    %         id = (attribute_single_value_str{4});
+    %         isOutput = (attribute_single_value_str{5});
+    %         attr = (attribute_single_value_str{6});
+    %         option = (attribute_single_value_str{7});
 
-            switch object
-            case 'rx'
-                obj = adi.AD9361.Rx('uri',testCase.uri);
-                obj.EnabledChannels = [1 2];
-            case 'tx'
-                obj = adi.AD9361.Tx('uri',testCase.uri);
-                obj.DataSource = 'DDS';
-            end
+    %         switch object
+    %         case 'rx'
+    %             obj = adi.AD9361.Rx('uri',testCase.uri);
+    %             obj.EnabledChannels = [1 2];
+    %         case 'tx'
+    %             obj = adi.AD9361.Tx('uri',testCase.uri);
+    %             obj.DataSource = 'DDS';
+    %         end
 
-            if strcmp(property(1:end-1),'GainControlModeChannel')
-                obj();
-            end
+    %         if strcmp(property(1:end-1),'GainControlModeChannel')
+    %             obj();
+    %         end
 
-            for ii = 1:length(option)
-                obj.(property) = option(ii);
-                obj();
-                switch valueType
-                case 'DebugLongLong'
-                    ret_val = obj.getDebugAttributeLongLong(attr);
-                case 'Bool'
-                    ret_val = obj.getAttributeBool(id,attr,isOutput);
-                case 'RAW'
-                    ret_val = obj.getAttributeRAW(id,attr,isOutput);
-                end
-                if ~strcmp(property(1:end-1),'GainControlModeChannel')
-                    obj.release(); %FIXME: Releasing here will not work for GainControlMode
-                end
-                testCase.verifyTrue(strcmp(string(ret_val),string(option(ii))),...
-                    sprintf('%s.%s: Cannot set channel attribute to %s.', (object), (property), string(option(ii))))
-            end
-            obj.release();
-        end
+    %         for ii = 1:length(option)
+    %             obj.(property) = option(ii);
+    %             obj();
+    %             switch valueType
+    %             case 'DebugLongLong'
+    %                 ret_val = obj.getDebugAttributeLongLong(attr);
+    %             case 'Bool'
+    %                 ret_val = obj.getAttributeBool(id,attr,isOutput);
+    %             case 'RAW'
+    %                 ret_val = obj.getAttributeRAW(id,attr,isOutput);
+    %             end
+    %             if ~strcmp(property(1:end-1),'GainControlModeChannel')
+    %                 obj.release(); %FIXME: Releasing here will not work for GainControlMode
+    %             end
+    %             testCase.verifyTrue(strcmp(string(ret_val),string(option(ii))),...
+    %                 sprintf('%s.%s: Cannot set channel attribute to %s.', (object), (property), string(option(ii))))
+    %         end
+    %         obj.release();
+    %     end
         
-    end
+    % end
 
     methods (Test)
         
@@ -153,138 +153,138 @@ classdef AD9361Tests < HardwareTests
             testCase.verifyGreaterThan(sum(abs(double(out))),0);
         end
         
-        function testAD9361RxCustomFilter(testCase)
-            % Test Rx Custom filters
-            rx = adi.AD9361.Rx('uri',testCase.uri);
-            rx.EnabledChannels = 1;
-            rx.EnableCustomFilter = true;
-            rx.CustomFilterFileName = 'customAD9361filter.ftr';
-            [out, valid] = rx();
-            % Check sample rate
-            sr = rx.getAttributeLongLong('voltage0','sampling_frequency',false);
-            rx.release();
-            testCase.verifyTrue(valid);
-            testCase.verifyEqual(double(sr),3000000,'Incorrect sample rate');
-            testCase.verifyGreaterThan(sum(abs(double(out))),0);
-        end
+        % function testAD9361RxCustomFilter(testCase)
+        %     % Test Rx Custom filters
+        %     rx = adi.AD9361.Rx('uri',testCase.uri);
+        %     rx.EnabledChannels = 1;
+        %     rx.EnableCustomFilter = true;
+        %     rx.CustomFilterFileName = 'customAD9361filter.ftr';
+        %     [out, valid] = rx();
+        %     % Check sample rate
+        %     sr = rx.getAttributeLongLong('voltage0','sampling_frequency',false);
+        %     rx.release();
+        %     testCase.verifyTrue(valid);
+        %     testCase.verifyEqual(double(sr),3000000,'Incorrect sample rate');
+        %     testCase.verifyGreaterThan(sum(abs(double(out))),0);
+        % end
         
-        function testAD9361RxCustomFilterLTE(testCase)
-            % Test Rx Custom filters
-            rx = adi.AD9361.Rx('uri',testCase.uri);
-            rx.EnabledChannels = 1;
-            rx.EnableCustomFilter = true;
-            rx.CustomFilterFileName = 'LTE15_MHz.ftr';
-            [out, valid] = rx();
-            % Check sample rate
-            sr = rx.getAttributeLongLong('voltage0','sampling_frequency',false);
-            rx.release();
-            testCase.verifyTrue(valid);
-            testCase.verifyEqual(double(sr),23040000,'Incorrect sample rate');
-            testCase.verifyGreaterThan(sum(abs(double(out))),0);
-        end
+        % function testAD9361RxCustomFilterLTE(testCase)
+        %     % Test Rx Custom filters
+        %     rx = adi.AD9361.Rx('uri',testCase.uri);
+        %     rx.EnabledChannels = 1;
+        %     rx.EnableCustomFilter = true;
+        %     rx.CustomFilterFileName = 'LTE15_MHz.ftr';
+        %     [out, valid] = rx();
+        %     % Check sample rate
+        %     sr = rx.getAttributeLongLong('voltage0','sampling_frequency',false);
+        %     rx.release();
+        %     testCase.verifyTrue(valid);
+        %     testCase.verifyEqual(double(sr),23040000,'Incorrect sample rate');
+        %     testCase.verifyGreaterThan(sum(abs(double(out))),0);
+        % end
         
-        function testAD9361TxCustomFilter(testCase)
-            % Test Tx Custom filters
-            tx = adi.AD9361.Tx('uri',testCase.uri);
-            tx.EnabledChannels = 1;
-            tx.EnableCustomFilter = true;
-            tx.CustomFilterFileName = 'customAD9361filter.ftr';
-            data = complex(randn(1e4,1),randn(1e4,1));
-            [valid] = tx(data);
-            % Check sample rate
-            sr1 = tx.getAttributeLongLong('voltage0','sampling_frequency',false);
-            sr2 = tx.getAttributeLongLong('voltage0','sampling_frequency',true);
-            tx.release();
-            testCase.verifyTrue(valid);
-            testCase.verifyEqual(double(sr1),3000000,'Incorrect sample rate');
-            testCase.verifyEqual(double(sr2),3000000,'Incorrect sample rate');
-        end
+        % function testAD9361TxCustomFilter(testCase)
+        %     % Test Tx Custom filters
+        %     tx = adi.AD9361.Tx('uri',testCase.uri);
+        %     tx.EnabledChannels = 1;
+        %     tx.EnableCustomFilter = true;
+        %     tx.CustomFilterFileName = 'customAD9361filter.ftr';
+        %     data = complex(randn(1e4,1),randn(1e4,1));
+        %     [valid] = tx(data);
+        %     % Check sample rate
+        %     sr1 = tx.getAttributeLongLong('voltage0','sampling_frequency',false);
+        %     sr2 = tx.getAttributeLongLong('voltage0','sampling_frequency',true);
+        %     tx.release();
+        %     testCase.verifyTrue(valid);
+        %     testCase.verifyEqual(double(sr1),3000000,'Incorrect sample rate');
+        %     testCase.verifyEqual(double(sr2),3000000,'Incorrect sample rate');
+        % end
         
-        function testAD9361TxCustomFilterLTE(testCase)
-            % Test Tx Custom filters
-            tx = adi.AD9361.Tx('uri',testCase.uri);
-            tx.EnabledChannels = 1;
-            tx.EnableCustomFilter = true;
-            tx.CustomFilterFileName = 'LTE15_MHz.ftr';
-            data = complex(randn(1e4,1),randn(1e4,1));
-            [valid] = tx(data);
-            % Check sample rate
-            sr1 = tx.getAttributeLongLong('voltage0','sampling_frequency',false);
-            sr2 = tx.getAttributeLongLong('voltage0','sampling_frequency',true);
-            tx.release();
-            testCase.verifyTrue(valid);
-            testCase.verifyEqual(double(sr1),23040000,'Incorrect sample rate');
-            testCase.verifyEqual(double(sr2),23040000,'Incorrect sample rate');
-        end
+        % function testAD9361TxCustomFilterLTE(testCase)
+        %     % Test Tx Custom filters
+        %     tx = adi.AD9361.Tx('uri',testCase.uri);
+        %     tx.EnabledChannels = 1;
+        %     tx.EnableCustomFilter = true;
+        %     tx.CustomFilterFileName = 'LTE15_MHz.ftr';
+        %     data = complex(randn(1e4,1),randn(1e4,1));
+        %     [valid] = tx(data);
+        %     % Check sample rate
+        %     sr1 = tx.getAttributeLongLong('voltage0','sampling_frequency',false);
+        %     sr2 = tx.getAttributeLongLong('voltage0','sampling_frequency',true);
+        %     tx.release();
+        %     testCase.verifyTrue(valid);
+        %     testCase.verifyEqual(double(sr1),23040000,'Incorrect sample rate');
+        %     testCase.verifyEqual(double(sr2),23040000,'Incorrect sample rate');
+        % end
         
-        function testAD9361RxClearing(testCase)
-            % Verify clearing of system objects is working in all cases
-            rx = adi.AD9361.Rx();
-            rx.uri = testCase.uri;
-            if rx.Count ~= 0
-                error('e1');
-            end
-            rx();
-            if rx.Count ~= 1
-                error('e2');
-            end
-            rx.release();
-            if rx.Count ~= 0
-                error('e3');
-            end
-            %
-            rx = adi.AD9361.Rx();
-            rx.uri = testCase.uri;
-            if rx.Count ~= 0
-                error('e4');
-            end
-            rx();
-            delete(rx)
-            rx = adi.AD9361.Rx();
-            rx.uri = testCase.uri;
-            if rx.Count ~= 0
-                error('e5');
-            end
-            rx();            
-            if rx.Count ~= 1
-                error('e6');
-            end
-            %
-            rx.release();
-        end
+        % function testAD9361RxClearing(testCase)
+        %     % Verify clearing of system objects is working in all cases
+        %     rx = adi.AD9361.Rx();
+        %     rx.uri = testCase.uri;
+        %     if rx.Count ~= 0
+        %         error('e1');
+        %     end
+        %     rx();
+        %     if rx.Count ~= 1
+        %         error('e2');
+        %     end
+        %     rx.release();
+        %     if rx.Count ~= 0
+        %         error('e3');
+        %     end
+        %     %
+        %     rx = adi.AD9361.Rx();
+        %     rx.uri = testCase.uri;
+        %     if rx.Count ~= 0
+        %         error('e4');
+        %     end
+        %     rx();
+        %     delete(rx)
+        %     rx = adi.AD9361.Rx();
+        %     rx.uri = testCase.uri;
+        %     if rx.Count ~= 0
+        %         error('e5');
+        %     end
+        %     rx();            
+        %     if rx.Count ~= 1
+        %         error('e6');
+        %     end
+        %     %
+        %     rx.release();
+        % end
         
-        function testAD9361RxWithTxDDS(testCase)
-            % Test DDS output
-            tx = adi.AD9361.Tx('uri',testCase.uri);
-            tx.DataSource = 'DDS';
-            toneFreq = 5e5;
-            tx.DDSFrequencies = repmat(toneFreq,2,2);
-            tx.AttenuationChannel0 = -10;
-            tx.SamplingRate = 3e6;
-            tx();
-            pause(1);
-            rx = adi.AD9361.Rx('uri',testCase.uri);
-            rx.EnabledChannels = 1;
-            rx.kernelBuffersCount = 1;
-            rx.SamplingRate = 3e6;
-            for k=1:10
-                valid = false;
-                while ~valid
-                    [out, valid] = rx();
-                end
-            end
-            rx.release();
+%         function testAD9361RxWithTxDDS(testCase)
+%             % Test DDS output
+%             tx = adi.AD9361.Tx('uri',testCase.uri);
+%             tx.DataSource = 'DDS';
+%             toneFreq = 5e5;
+%             tx.DDSFrequencies = repmat(toneFreq,2,2);
+%             tx.AttenuationChannel0 = -10;
+%             tx.SamplingRate = 3e6;
+%             tx();
+%             pause(1);
+%             rx = adi.AD9361.Rx('uri',testCase.uri);
+%             rx.EnabledChannels = 1;
+%             rx.kernelBuffersCount = 1;
+%             rx.SamplingRate = 3e6;
+%             for k=1:10
+%                 valid = false;
+%                 while ~valid
+%                     [out, valid] = rx();
+%                 end
+%             end
+%             rx.release();
 
-%             plot(real(out));
-%             testCase.estFrequency(out,rx.SamplingRate);
-            freqEst = meanfreq(double(real(out)),rx.SamplingRate);
+% %             plot(real(out));
+% %             testCase.estFrequency(out,rx.SamplingRate);
+%             freqEst = meanfreq(double(real(out)),rx.SamplingRate);
 
-            testCase.verifyTrue(valid);
-            testCase.verifyGreaterThan(sum(abs(double(out))),0);
-            testCase.verifyEqual(freqEst,toneFreq,'RelTol',0.01,...
-                'Frequency of DDS tone unexpected')
+%             testCase.verifyTrue(valid);
+%             testCase.verifyGreaterThan(sum(abs(double(out))),0);
+%             testCase.verifyEqual(freqEst,toneFreq,'RelTol',0.01,...
+%                 'Frequency of DDS tone unexpected')
             
-        end
+%         end
         
         function testAD9361RxWithTxData(testCase)
             % Test Tx DMA data output

@@ -75,117 +75,117 @@ classdef ADRV9009Tests < HardwareTests
         end
     end
     
-    methods (Test)
+    % methods (Test)
     
-        function testADRV9009AttributeSingleValue(testCase,attribute_single_value)
-            warning('off') % Mute: "... property is not relevant in this configuration of the System object."
-            object = (attribute_single_value{1});
-            property = (attribute_single_value{2});
-            valueType = (attribute_single_value{3});
-            id = (attribute_single_value{4});
-            isOutput = (attribute_single_value{5});
-            attr = (attribute_single_value{6});
-            start = (attribute_single_value{7});
-            stop = (attribute_single_value{8});
-            step = (attribute_single_value{9});
-            tol = (attribute_single_value{10});
-            repeats = (attribute_single_value{11});
+    %     function testADRV9009AttributeSingleValue(testCase,attribute_single_value)
+    %         warning('off') % Mute: "... property is not relevant in this configuration of the System object."
+    %         object = (attribute_single_value{1});
+    %         property = (attribute_single_value{2});
+    %         valueType = (attribute_single_value{3});
+    %         id = (attribute_single_value{4});
+    %         isOutput = (attribute_single_value{5});
+    %         attr = (attribute_single_value{6});
+    %         start = (attribute_single_value{7});
+    %         stop = (attribute_single_value{8});
+    %         step = (attribute_single_value{9});
+    %         tol = (attribute_single_value{10});
+    %         repeats = (attribute_single_value{11});
             
-            switch object
-            case 'rx'
-                obj = adi.ADRV9009.Rx('uri',testCase.uri);
-                if strcmp(property(1:end-1),'GainChannel')
-                    obj.EnabledChannels = [1 2];
-                    obj.GainControlMode = 'manual';
-                end
-            case 'tx'
-                obj = adi.ADRV9009.Tx('uri',testCase.uri);
-                obj.DataSource = 'DDS';
-            case 'orx'
-                obj = adi.ADRV9009.ORx('uri',testCase.uri);
-                if strcmp(property,'AUXFrequency')
-                    obj.LOSourceSelect = 'OBS_AUX_LO';
-                end
-            end
-            obj();
+    %         switch object
+    %         case 'rx'
+    %             obj = adi.ADRV9009.Rx('uri',testCase.uri);
+    %             if strcmp(property(1:end-1),'GainChannel')
+    %                 obj.EnabledChannels = [1 2];
+    %                 obj.GainControlMode = 'manual';
+    %             end
+    %         case 'tx'
+    %             obj = adi.ADRV9009.Tx('uri',testCase.uri);
+    %             obj.DataSource = 'DDS';
+    %         case 'orx'
+    %             obj = adi.ADRV9009.ORx('uri',testCase.uri);
+    %             if strcmp(property,'AUXFrequency')
+    %                 obj.LOSourceSelect = 'OBS_AUX_LO';
+    %             end
+    %         end
+    %         obj();
             
-            numints = round((stop-start)/step);
-            for ii = 1:repeats
-                ind = randi([0, numints]);
-                write_val = start+(step*ind); 
-                if strcmp(attr,'hardwaregain')
-                    write_val = round(write_val,2);
-                end
-                obj.(property) = write_val;
-                obj();
-                switch valueType
-                    case 'LongLong'
-                        ret_val = double(obj.getAttributeLongLong(id,attr,isOutput));
-                    case 'Double'
-                        ret_val = double(obj.getAttributeDouble(id,attr,isOutput));
-                end
-                testCase.verifyEqual(ret_val,write_val,'AbsTol',tol,...
-                    sprintf('%s.%s: Actual value written to device outside tolerance.', (object), (property)))
-            end
+    %         numints = round((stop-start)/step);
+    %         for ii = 1:repeats
+    %             ind = randi([0, numints]);
+    %             write_val = start+(step*ind); 
+    %             if strcmp(attr,'hardwaregain')
+    %                 write_val = round(write_val,2);
+    %             end
+    %             obj.(property) = write_val;
+    %             obj();
+    %             switch valueType
+    %                 case 'LongLong'
+    %                     ret_val = double(obj.getAttributeLongLong(id,attr,isOutput));
+    %                 case 'Double'
+    %                     ret_val = double(obj.getAttributeDouble(id,attr,isOutput));
+    %             end
+    %             testCase.verifyEqual(ret_val,write_val,'AbsTol',tol,...
+    %                 sprintf('%s.%s: Actual value written to device outside tolerance.', (object), (property)))
+    %         end
 
-            if strcmp(object,'orx')
-                testCase.powerRx(obj);
-            end
+    %         if strcmp(object,'orx')
+    %             testCase.powerRx(obj);
+    %         end
             
-            obj.release();
-        end
+    %         obj.release();
+    %     end
 
-        function testADRV9009AttributeSingleValueStr(testCase,attribute_single_value_str)
-            object = (attribute_single_value_str{1});
-            property = (attribute_single_value_str{2});
-            valueType = (attribute_single_value_str{3});
-            id = (attribute_single_value_str{4});
-            isOutput = (attribute_single_value_str{5});
-            attr = (attribute_single_value_str{6});
-            option = (attribute_single_value_str{7});
+    %     function testADRV9009AttributeSingleValueStr(testCase,attribute_single_value_str)
+    %         object = (attribute_single_value_str{1});
+    %         property = (attribute_single_value_str{2});
+    %         valueType = (attribute_single_value_str{3});
+    %         id = (attribute_single_value_str{4});
+    %         isOutput = (attribute_single_value_str{5});
+    %         attr = (attribute_single_value_str{6});
+    %         option = (attribute_single_value_str{7});
 
-            switch object
-            case 'rx'
-                obj = adi.ADRV9009.Rx('uri',testCase.uri);
-                obj.EnabledChannels = [1 2];
-            case 'tx'
-                obj = adi.ADRV9009.Tx('uri',testCase.uri);
-                obj.DataSource = 'DDS';
-            case 'orx'
-                obj = adi.ADRV9009.ORx('uri',testCase.uri);
-            end
+    %         switch object
+    %         case 'rx'
+    %             obj = adi.ADRV9009.Rx('uri',testCase.uri);
+    %             obj.EnabledChannels = [1 2];
+    %         case 'tx'
+    %             obj = adi.ADRV9009.Tx('uri',testCase.uri);
+    %             obj.DataSource = 'DDS';
+    %         case 'orx'
+    %             obj = adi.ADRV9009.ORx('uri',testCase.uri);
+    %         end
 
-            if strcmp(property(1:end-1),'GainControlMode')
-                id = 'voltage1';
-                obj();
-            end
+    %         if strcmp(property(1:end-1),'GainControlMode')
+    %             id = 'voltage1';
+    %             obj();
+    %         end
 
-            for ii = 1:length(option)
-                obj.(property) = option(ii);
-                obj();
-                switch valueType
-                case 'DeviceAttributeRAW'
-                    ret_val = strcmp(obj.getDeviceAttributeRAW(attr,4),'1'); % returns char 1 or 0; confirm size_t len value
-                case 'Bool'
-                    ret_val = obj.getAttributeBool(id,attr,isOutput);
-                case 'RAW'
-                    ret_val = obj.getAttributeRAW(id,attr,isOutput);
-                end
-                if ~strcmp(property(1:end-1),'GainControlModeChannel')
-                    obj.release(); %FIXME: Releasing here will not work for GainControlMode
-                end
-                testCase.verifyTrue(strcmp(string(ret_val),string(option(ii))),...
-                    sprintf('%s.%s: Cannot set channel attribute to %s.', (object), (property), string(option(ii))))
-            end
+    %         for ii = 1:length(option)
+    %             obj.(property) = option(ii);
+    %             obj();
+    %             switch valueType
+    %             case 'DeviceAttributeRAW'
+    %                 ret_val = strcmp(obj.getDeviceAttributeRAW(attr,4),'1'); % returns char 1 or 0; confirm size_t len value
+    %             case 'Bool'
+    %                 ret_val = obj.getAttributeBool(id,attr,isOutput);
+    %             case 'RAW'
+    %                 ret_val = obj.getAttributeRAW(id,attr,isOutput);
+    %             end
+    %             if ~strcmp(property(1:end-1),'GainControlModeChannel')
+    %                 obj.release(); %FIXME: Releasing here will not work for GainControlMode
+    %             end
+    %             testCase.verifyTrue(strcmp(string(ret_val),string(option(ii))),...
+    %                 sprintf('%s.%s: Cannot set channel attribute to %s.', (object), (property), string(option(ii))))
+    %         end
 
-            if strcmp(object,'orx')
-                testCase.powerRx(obj);
-            end
+    %         if strcmp(object,'orx')
+    %             testCase.powerRx(obj);
+    %         end
 
-            obj.release();
-        end
+    %         obj.release();
+    %     end
 
-    end
+    % end
     
     methods (Test)
         
@@ -199,47 +199,47 @@ classdef ADRV9009Tests < HardwareTests
             testCase.verifyGreaterThan(sum(abs(double(out))),0);
         end
         
-        function testADRV9009RxCustomProfile1(testCase)
-            % Test Rx custom profiles
-            rx = adi.ADRV9009.Rx('uri',testCase.uri);
-            rx.EnabledChannels = 1;
-            rx.EnableCustomProfile = true;
-            rx.CustomProfileFileName = ...
-                'Tx_BW200_IR245p76_Rx_BW200_OR245p76_ORx_BW200_OR245p76_DC245p76.txt';
-            [out, valid] = rx();
-            rxSampleRate = rx.getAttributeLongLong('voltage0',...
-                'sampling_frequency',false);
-            txSampleRate = rx.getAttributeLongLong('voltage0',...
-                'sampling_frequency',true);
-            rx.release();
-            testCase.verifyTrue(valid);
-            testCase.verifyGreaterThan(sum(abs(double(out))),0);
-            testCase.verifyEqual(rxSampleRate,int64(245.76e6),...
-                'Invalid sample rate after profile write');
-            testCase.verifyEqual(txSampleRate,int64(245.76e6),...
-                'Invalid sample rate after profile write');
-        end
+        % function testADRV9009RxCustomProfile1(testCase)
+        %     % Test Rx custom profiles
+        %     rx = adi.ADRV9009.Rx('uri',testCase.uri);
+        %     rx.EnabledChannels = 1;
+        %     rx.EnableCustomProfile = true;
+        %     rx.CustomProfileFileName = ...
+        %         'Tx_BW200_IR245p76_Rx_BW200_OR245p76_ORx_BW200_OR245p76_DC245p76.txt';
+        %     [out, valid] = rx();
+        %     rxSampleRate = rx.getAttributeLongLong('voltage0',...
+        %         'sampling_frequency',false);
+        %     txSampleRate = rx.getAttributeLongLong('voltage0',...
+        %         'sampling_frequency',true);
+        %     rx.release();
+        %     testCase.verifyTrue(valid);
+        %     testCase.verifyGreaterThan(sum(abs(double(out))),0);
+        %     testCase.verifyEqual(rxSampleRate,int64(245.76e6),...
+        %         'Invalid sample rate after profile write');
+        %     testCase.verifyEqual(txSampleRate,int64(245.76e6),...
+        %         'Invalid sample rate after profile write');
+        % end
         
-        function testADRV9009RxCustomProfile2(testCase)
-            % Test Rx custom profiles
-            rx = adi.ADRV9009.Rx('uri',testCase.uri);
-            rx.EnabledChannels = 1;
-            rx.EnableCustomProfile = true;
-            rx.CustomProfileFileName = ...
-                'Tx_BW400_IR491p52_Rx_BW200_OR245p76_ORx_BW400_OR491p52_DC245p76.txt';
-            [out, valid] = rx();
-            rxSampleRate = rx.getAttributeLongLong('voltage0',...
-                'sampling_frequency',false);
-            txSampleRate = rx.getAttributeLongLong('voltage0',...
-                'sampling_frequency',true);
-            rx.release();
-            testCase.verifyTrue(valid);
-            testCase.verifyGreaterThan(sum(abs(double(out))),0);
-            testCase.verifyEqual(rxSampleRate,int64(245.76e6),...
-                'Invalid sample rate after profile write');
-            testCase.verifyEqual(txSampleRate,int64(245.76e6*2),...
-                'Invalid sample rate after profile write');
-        end
+        % function testADRV9009RxCustomProfile2(testCase)
+        %     % Test Rx custom profiles
+        %     rx = adi.ADRV9009.Rx('uri',testCase.uri);
+        %     rx.EnabledChannels = 1;
+        %     rx.EnableCustomProfile = true;
+        %     rx.CustomProfileFileName = ...
+        %         'Tx_BW400_IR491p52_Rx_BW200_OR245p76_ORx_BW400_OR491p52_DC245p76.txt';
+        %     [out, valid] = rx();
+        %     rxSampleRate = rx.getAttributeLongLong('voltage0',...
+        %         'sampling_frequency',false);
+        %     txSampleRate = rx.getAttributeLongLong('voltage0',...
+        %         'sampling_frequency',true);
+        %     rx.release();
+        %     testCase.verifyTrue(valid);
+        %     testCase.verifyGreaterThan(sum(abs(double(out))),0);
+        %     testCase.verifyEqual(rxSampleRate,int64(245.76e6),...
+        %         'Invalid sample rate after profile write');
+        %     testCase.verifyEqual(txSampleRate,int64(245.76e6*2),...
+        %         'Invalid sample rate after profile write');
+        % end
 %         
 %         function testADRV9009RxCustomProfileZC706(testCase)
 %             % Test Rx custom profiles
@@ -296,52 +296,52 @@ classdef ADRV9009Tests < HardwareTests
             
         end
         
-        function testADRV9009RxWithTxDDSTwoChan(testCase)
-            % Test DDS output
-            tx = adi.ADRV9009.Tx('uri',testCase.uri);
-            tx.DataSource = 'DDS';
-            toneFreq1 = 30e6;
-            toneFreq2 = 85e6;
+%         function testADRV9009RxWithTxDDSTwoChan(testCase)
+%             % Test DDS output
+%             tx = adi.ADRV9009.Tx('uri',testCase.uri);
+%             tx.DataSource = 'DDS';
+%             toneFreq1 = 30e6;
+%             toneFreq2 = 85e6;
             
-            tx.DDSFrequencies = [toneFreq1,toneFreq1,toneFreq2,toneFreq2;...
-                0,0,0,0];
-            tx.DDSScales = [1,1,1,1;...
-                0,0,0,0];
-            tx.DDSPhases = [90000,0,90000,0;...
-                0,0,0,0];
+%             tx.DDSFrequencies = [toneFreq1,toneFreq1,toneFreq2,toneFreq2;...
+%                 0,0,0,0];
+%             tx.DDSScales = [1,1,1,1;...
+%                 0,0,0,0];
+%             tx.DDSPhases = [90000,0,90000,0;...
+%                 0,0,0,0];
             
-            tx.AttenuationChannel0 = -10;
-            tx.EnableCustomProfile = true;
-            tx.CustomProfileFileName = ...
-                'Tx_BW200_IR245p76_Rx_BW200_OR245p76_ORx_BW200_OR245p76_DC245p76.txt';
-            tx();
-            pause(1);
-            rx = adi.ADRV9009.Rx('uri',testCase.uri);
-            rx.EnabledChannels = [1,2];
-            rx.kernelBuffersCount = 1;
-            for k=1:10
-                valid = false;
-                while ~valid
-                    [out, valid] = rx();
-                end
-            end
+%             tx.AttenuationChannel0 = -10;
+%             tx.EnableCustomProfile = true;
+%             tx.CustomProfileFileName = ...
+%                 'Tx_BW200_IR245p76_Rx_BW200_OR245p76_ORx_BW200_OR245p76_DC245p76.txt';
+%             tx();
+%             pause(1);
+%             rx = adi.ADRV9009.Rx('uri',testCase.uri);
+%             rx.EnabledChannels = [1,2];
+%             rx.kernelBuffersCount = 1;
+%             for k=1:10
+%                 valid = false;
+%                 while ~valid
+%                     [out, valid] = rx();
+%                 end
+%             end
             
-            rxSampleRate = rx.getAttributeLongLong('voltage0',...
-                'sampling_frequency',false);
+%             rxSampleRate = rx.getAttributeLongLong('voltage0',...
+%                 'sampling_frequency',false);
             
-            rx.release();
+%             rx.release();
 
-%             plot(real(out));
-%             testCase.estFrequency(out,rxSampleRate);
-            freqEst = meanfreq(double(real(out)),rxSampleRate);
+% %             plot(real(out));
+% %             testCase.estFrequency(out,rxSampleRate);
+%             freqEst = meanfreq(double(real(out)),rxSampleRate);
 
-            testCase.verifyTrue(valid);
-            testCase.verifyGreaterThan(sum(abs(double(out))),0);
-            testCase.verifyEqual(freqEst(1),toneFreq1,'RelTol',0.01,...
-                'Frequency of DDS tone unexpected')
-            testCase.verifyEqual(freqEst(2),toneFreq2,'RelTol',0.01,...
-                'Frequency of DDS tone unexpected')
-        end
+%             testCase.verifyTrue(valid);
+%             testCase.verifyGreaterThan(sum(abs(double(out))),0);
+%             testCase.verifyEqual(freqEst(1),toneFreq1,'RelTol',0.01,...
+%                 'Frequency of DDS tone unexpected')
+%             testCase.verifyEqual(freqEst(2),toneFreq2,'RelTol',0.01,...
+%                 'Frequency of DDS tone unexpected')
+%         end
         
         function testADRV9009RxWithTxData(testCase)
             % Test Tx DMA data output
@@ -385,54 +385,54 @@ classdef ADRV9009Tests < HardwareTests
                 'Frequency of ML tone unexpected')
         end
         
-        function testADRV9009TxPowerdown(testCase)
-            % Test Powerdown and up of TX
-            tx = adi.ADRV9009.Tx('uri',testCase.uri);
-            tx.DataSource = 'DDS';
-            tx.PowerdownChannel0 = true;
-            tx.PowerdownChannel1 = true;
-            tx();
-            tx.release();
-            tx = adi.ADRV9009.Tx('uri',testCase.uri);
-            tx.DataSource = 'DDS';
-            tx.PowerdownChannel0 = false;
-            tx.PowerdownChannel1 = false;
-            tx();
-            tx.release();
-        end
+        % function testADRV9009TxPowerdown(testCase)
+        %     % Test Powerdown and up of TX
+        %     tx = adi.ADRV9009.Tx('uri',testCase.uri);
+        %     tx.DataSource = 'DDS';
+        %     tx.PowerdownChannel0 = true;
+        %     tx.PowerdownChannel1 = true;
+        %     tx();
+        %     tx.release();
+        %     tx = adi.ADRV9009.Tx('uri',testCase.uri);
+        %     tx.DataSource = 'DDS';
+        %     tx.PowerdownChannel0 = false;
+        %     tx.PowerdownChannel1 = false;
+        %     tx();
+        %     tx.release();
+        % end
 
-        function testADRV9009RxPowerdown(testCase)
-            rx = adi.ADRV9009.Rx('uri',testCase.uri);
-            rx.EnabledChannels = [1 2];
-            rx.PowerdownChannel0 = true;
-            rx.PowerdownChannel1 = true;
-            rx();
-            [out, valid] = rx();
-            rx.release();
+        % function testADRV9009RxPowerdown(testCase)
+        %     rx = adi.ADRV9009.Rx('uri',testCase.uri);
+        %     rx.EnabledChannels = [1 2];
+        %     rx.PowerdownChannel0 = true;
+        %     rx.PowerdownChannel1 = true;
+        %     rx();
+        %     [out, valid] = rx();
+        %     rx.release();
 
-            testCase.verifyTrue(valid);
-            testCase.verifyEqual(sum(sum(abs(double(out)))),0);
+        %     testCase.verifyTrue(valid);
+        %     testCase.verifyEqual(sum(sum(abs(double(out)))),0);
 
-            rx = adi.ADRV9009.Rx('uri',testCase.uri);
-            rx.PowerdownChannel0 = false;
-            rx.PowerdownChannel1 = false;
-            rx();
-            rx.release();
-        end
+        %     rx = adi.ADRV9009.Rx('uri',testCase.uri);
+        %     rx.PowerdownChannel0 = false;
+        %     rx.PowerdownChannel1 = false;
+        %     rx();
+        %     rx.release();
+        % end
             
-        function testADRV9009ORxPowerdown(testCase)
-            orx = adi.ADRV9009.ORx('uri',testCase.uri);
-            orx.PowerdownChannel0 = true;
-            orx.PowerdownChannel1 = true;
-            orx();
-            [out, valid] = orx();
+        % function testADRV9009ORxPowerdown(testCase)
+        %     orx = adi.ADRV9009.ORx('uri',testCase.uri);
+        %     orx.PowerdownChannel0 = true;
+        %     orx.PowerdownChannel1 = true;
+        %     orx();
+        %     [out, valid] = orx();
 
-            testCase.verifyTrue(valid);
-            testCase.verifyEqual(sum(abs(double(out))),0);
+        %     testCase.verifyTrue(valid);
+        %     testCase.verifyEqual(sum(abs(double(out))),0);
 
-            testCase.powerRx(orx);
-            orx.release();
-        end
+        %     testCase.powerRx(orx);
+        %     orx.release();
+        % end
         
     end
     
