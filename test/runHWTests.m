@@ -76,11 +76,9 @@ try
     t = table(results);
     disp(t);
     disp(repmat('#',1,80));
-    failures = 0;
     for test = results
         if test.Failed
             disp(test.Name);
-            failures = failures + 1;
         end
     end
 catch e
