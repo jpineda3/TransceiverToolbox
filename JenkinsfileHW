@@ -15,7 +15,7 @@ lock(label: 'adgt_test_harness_boards') {
 
   //udpate repos
   harness.set_env('nebula_repo', 'https://github.com/sdgtt/nebula.git')
-  harness.set_env('nebula_branch', 'do_not_load_system_uart_if_zcu102')
+  harness.set_env('nebula_branch', 'master')
   // harness.set_env('nebula_branch','dev')
   harness.set_env('libiio_branch', 'v0.21')
   harness.set_env('telemetry_repo', 'https://github.com/sdgtt/telemetry.git')
