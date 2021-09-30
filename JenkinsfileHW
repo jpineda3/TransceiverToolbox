@@ -1,6 +1,6 @@
 // Pipeline
 lock(label: 'adgt_test_harness_boards') {
-  @Library('sdgtt-lib@adgt-test-harness') _ // Not necessary when we turn on global libraries :)
+  @Library('jp-lib@tlbx-harness') _ // Not necessary when we turn on global libraries :)
   def dependencies = ["nebula", "libiio", "libiio-py"]
   def hdlBranch = "hdl_2019_r2"
   def linuxBranch = "2019_R2"
@@ -52,6 +52,7 @@ lock(label: 'adgt_test_harness_boards') {
   //set other test parameters
   harness.set_nebula_debug(true)
   harness.set_enable_docker(true)
+  harness.set_log_jira(false)
   harness.set_send_telemetry(false)
   harness.set_docker_host_mode(false)
   harness.set_enable_resource_queuing(true)
