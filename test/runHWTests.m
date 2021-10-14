@@ -4,7 +4,7 @@ import matlab.unittest.TestRunner;
 import matlab.unittest.TestSuite;
 import matlab.unittest.plugins.TestReportPlugin;
 import matlab.unittest.plugins.XMLPlugin
-% import matlab.unittest.plugins.DiagnosticsValidationPlugin
+import matlab.unittest.plugins.DiagnosticsValidationPlugin
 import matlab.unittest.parameters.Parameter
 import matlab.unittest.plugins.ToUniqueFile;
 import matlab.unittest.plugins.TAPPlugin;
@@ -64,7 +64,7 @@ switch board
         error('%s unsupported for HW test harness', board);
 end
 ats = {'AD9361Tests','AD9363Tests','AD9364Tests','FMComms5Tests',...
-        'AD9371Tests','ADRV9009Tests','DAQ2Tests'};
+        'AD9371Tests','ADRV9002Tests','ADRV9009Tests','DAQ2Tests'};
 
 if nargin == 0
     suite = testsuite(ats);
@@ -76,7 +76,7 @@ end
 try
     
     runner = matlab.unittest.TestRunner.withTextOutput('OutputDetail',1);
-%     runner.addPlugin(DiagnosticsValidationPlugin)
+    runner.addPlugin(DiagnosticsValidationPlugin)
     xmlFile = strcat('HWTestResults.xml');
     plugin = XMLPlugin.producingJUnitFormat(xmlFile);
     
