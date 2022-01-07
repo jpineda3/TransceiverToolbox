@@ -84,7 +84,7 @@ try
     t = table(results);
     disp(t);
     disp(repmat('#',1,80));
-    fid = fopen('Failed.txt','a+');
+    fid = fopen('failures.txt','a+');
     for test = results
         if test.Failed
             disp(test.Name);
