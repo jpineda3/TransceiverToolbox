@@ -75,7 +75,7 @@ try
     
     runner = matlab.unittest.TestRunner.withTextOutput('OutputDetail',1);
     runner.addPlugin(DiagnosticsValidationPlugin)
-    xmlFile = board+'_HWTestResults.xml';
+    xmlFile = 'HWTestResults.xml';
     plugin = XMLPlugin.producingJUnitFormat(xmlFile);
     
     runner.addPlugin(plugin);
