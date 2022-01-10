@@ -91,7 +91,7 @@ try
             fprintf(fid,string(test.Name)+'\n');
         end
     end
-    fclose(fid)
+    fclose(fid);
 catch e
     disp(getReport(e,'extended'));
     bdclose('all');
